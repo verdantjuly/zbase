@@ -1,0 +1,200 @@
+.cardbody {
+    padding: 0px 18px 0px 18px;
+}
+
+.alltitle {
+    font-size: 40px;
+
+}
+
+
+
+.allvote {
+
+    font-size: 30px;
+
+}
+
+.card {
+
+    width: 500px;
+    margin: 30px 8px 200px 8px;
+
+}
+
+
+.cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.allimage {
+    border-radius: 10%;
+}
+
+.header {
+    font-size: 30px;
+    font-style: italic;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+#search {
+    font-size: 15px;
+    margin: 15px 0px 30px 40px;
+    padding: 10px 10px 10px 10px;
+    width: 250px;
+
+    outline-color: rgba(216, 216, 216, 0.902);
+}
+
+#searchbtn {
+    margin-right: 20px;
+    height: 40px;
+    font-size: 15px;
+    color: white;
+    background-color: black;
+
+
+}
+
+#searchbtn:hover {
+    height: 40px;
+    font-size: 15px;
+    color: white;
+    background-color: black;
+    border: solid 3px gray;
+}
+
+
+.allrank {
+    font-size: 80px;
+    font-weight: 900;
+    font-style: italic;
+}
+
+
+#allchart,
+#mychart {
+    margin: 0px 2px 0px 2px;
+    width: 250px;
+    height: 70px;
+    font-size: 40px;
+    font-style: italic;
+    color: white;
+    background-color: black;
+    border: 4px solid black;
+
+
+}
+
+
+#allchart:focus,
+#mychart:focus,
+#allchart:hover,
+#mychart:hover {
+    margin: 0px 2px 0px 2px;
+    width: 250px;
+    height: 70px;
+    font-size: 40px;
+    font-style: italic;
+    color: black;
+    background-color: white;
+    border: 4px solid black;
+
+}
+
+#mobilebtn {
+    font-size: 40px;
+    margin-top: 30px;
+    width: 250px;
+    height: 70px;
+    border: none;
+}
+
+#desktopbtn {
+    font-size: 40px;
+    width: 250px;
+    height: 70px;
+    border: none;
+}
+
+#mobilebtn:hover,
+#mobilebtn:focus {
+    font-size: 40px;
+    width: 250px;
+    height: 70px;
+    border: solid 4px black;
+}
+
+
+#desktopbtn:hover,
+#desktopbtn:focus {
+    font-size: 40px;
+    width: 250px;
+    height: 70px;
+    border: solid 4px black;
+}
+
+.lovebtn {
+
+    width: 100px;
+    height: 100px;
+    border: none;
+    font-size: 80px;
+    color: rgb(115, 0, 23);
+    background-color: white;
+
+
+}
+
+.lovebtn:hover {
+
+    width: 100px;
+    height: 100px;
+    border: none;
+    font-size: 80px;
+    color: red;
+    background-color: white;
+
+
+}
+
+.alltime {
+    font-style: italic;
+    font-weight: 900;
+    font-size: 40px;
+
+}
+
+.allvote {
+    font-weight: 900;
+}
+
+.details {
+    width: 150px;
+    height: 50px;
+    font-size: 30px;
+    font-style: italic;
+    color: white;
+    background-color: black;
+    border: 4px solid black;
+    border-radius: 10%;
+}
+
+.details:hover {
+    width: 150px;
+    height: 50px;
+    font-size: 30px;
+    font-style: italic;
+    color: black;
+    background-color: white;
+    border: 4px solid black;
+    border-radius: 10%;
+}

@@ -2,79 +2,54 @@
 <html lang="en">
 
 <head>
-    <!-- utf-8 로 인코딩해 준다. -->
     <meta charset="UTF-8">
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- CSS 파일 연결 -->
-    <link rel="stylesheet" type="text/css" href="src/css/index.css" id="cssline" />
-
-    <!-- 화면 맨 위에 보이는 제목 -->
-    <title>인기 영화 검색 | node.js A-8 이다영</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css" id="cssline" />
 
 
+    <title>최신 영화 검색 | node.js A-8 이다영</title>
+
+
+    <script src="src/index.js" type="module"></script>
 </head>
 
-<!-- body를 켜면 바로 load()함수를 실행해 준다. -->
 
-<body onload="load()">
 
-    <div class="title">
-        <!-- h1으로 적은 제목을 클릭하면 load() 함수가 실행되어 처음 화면으로 돌아온다. -->
-        <h1 onclick="load()">Moviechart</h1>
+<body>
 
-        <!-- 각 버튼에 title을 통해 주석을 달아 기능을 설명하였다. 마우스를 hover 하면 보인다. -->
-        <div class=mobile>
-            <!-- 모바일 CSS로 바꾸는 버튼 -->
-            <button title="모바일과 데스크탑 버튼을 준비하였으니 기기 별로 편안하게 즐겨 주세요." id="mobilebtn" onclick="mobileSwitch()"
-                type="button">mobile</button>
+    <header class="header">
 
-            <!-- 데스크탑 CSS로 바꾸는 버튼 -->
-            <button title="모바일과 데스크탑 버튼을 준비하였으니 기기 별로 편안하게 즐겨 주세요." id="desktopbtn" onclick="desktopSwitch()"
-                type="button">desktop</button>
 
-        </div>
-        <div class="search">
-            <!-- search input box 검색어 입력 공간 -->
-            <!-- placeholder는 작성하기 전 표시할 문자를 뜻한다. -->
-            <!-- autofocus를 이용해 커서를 화면을 켜기 시작하자마자 search input box 에 고정할 수 있다. -->
+        <h1 class="home" id="home">Moviechart</h1>
+
+        <div class="searchbox">
+
             <input type="search" id="search" placeholder="search by title" autocomplete="off" autofocus>
-
-            <!-- 검색 버튼 -->
-            <button title="대소문자 모두 검색이 가능합니다. 검색어를 포함하고 있는 제목을 가진 모든 영화를 표시합니다. " id="searchbtn" onclick="search()"
+            <button title="대소문자 모두 검색이 가능합니다. 검색어를 포함하고 있는 제목을 가진 모든 영화를 표시합니다. " id="searchbtn"
                 type="button">Search</button>
 
-        </div>
-        <div class="chart">
-
-            <!-- 전체 차트 버튼 -->
-            <button title="all chart에서 하트를 누르면 my chart에 저장됩니다. 새로고침하면 하트는 초기화됩니다." id="chartbtn" onclick="load()"
-                type="button">all chart</button>
-
-            <!-- 애니메이션 차트 버튼 -->
-            <button title="animation chart를 누르면 애니메이션 장르만 담은 차트가 나옵니다. 순위는 애니메이션 기준으로 재정렬됩니다." id="chartbtn"
-                onclick="anime()" type="button">animation chart</button>
-
-            <!-- 내 차트 버튼 : 하트를 누른 카드만 정리해서 하트 개수 순으로 순위를 재정렬하여 보여준다.-->
-            <button title="하트를 누른 카드만 my chart에 담습니다. 하트의 숫자가 많을수록 my chart의 순위가 높아집니다." id="chartbtn"
-                onclick="mychart()" type="button">my chart</button>
 
         </div>
-    </div>
-    <!-- 카드 붙이는 곳 -->
-    <div class="cards" id="cards">
 
-    </div>
-    <!-- js 파일 연결, 각 파일마다 마지막 파일명이 다르다.-->
-    <script type="text/javascript" src="src/js/enter.js"></script>
-    <script type="text/javascript" src="src/js/index.js"></script>
-    <script type="text/javascript" src="src/js/search.js"></script>
-    <script type="text/javascript" src="src/js/love.js"></script>
-    <script type="text/javascript" src="src/js/switch.js"></script>
-    <script type="text/javascript" src="src/js/memo.js"></script>
+        <button title="all chart에서 하트를 누르면 my chart에 저장됩니다." id="allchart" type="button">all
+            chart</button>
+        <button title="하트를 누른 카드만 loved chart에 담습니다. 하트의 숫자가 많을수록 loved chart의 순위가 높아집니다." id="mychart"
+            type="button">loved chart</button>
 
 
+        <button title="모바일과 데스크탑 버튼을 준비하였으니 기기 별로 편안하게 즐겨 주세요." id="mobilebtn" type="button">mobile</button>
+
+
+        <button title="모바일과 데스크탑 버튼을 준비하였으니 기기 별로 편안하게 즐겨 주세요." id="desktopbtn" type="button">desktop</button>
+
+
+
+    </header>
+
+    <div class="cards" id="cards"></div>
 
 </body>
 
