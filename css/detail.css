@@ -59,7 +59,7 @@
 
 }
 
-#review {
+#reviewbox {
     border: 1px solid black;
     border-radius: 10px;
     width: 400px;
@@ -111,7 +111,7 @@
     height: 30px;
     background-color: black;
     color: white;
-    margin: 0px 0px 20px 0px;
+    margin: 0px 0px 0px 0px;
     font-style: italic;
     font-weight: 900;
     font-size: 15px;
@@ -127,7 +127,7 @@
     height: 30px;
     background-color: white;
     color: black;
-    margin: 0px 0px 20px 0px;
+    margin: 0px 0px 0px 0px;
     font-style: italic;
     font-weight: 900;
     font-size: 15px;
@@ -145,7 +145,7 @@
     font-weight: 900;
     font-size: 15px;
     border-bottom: 1px solid black;
-    margin-top: 40px;
+    margin-top: 10px;
 }
 
 #content {

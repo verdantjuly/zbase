@@ -57,24 +57,6 @@ function detailload() {
            <button class="edit" id="${movie.id}" type=" button">Edit</button>
            <button class="delete" id="${movie.id}" type=" button">Delete</button>
       </div>
-      <div class="commentviewbox">
-                <p id="latestreview">Latest Review</p>
-                <p id="top">Review</p>
-                <p class="content" id="reviewcontent1">
-                <p>
-                <p id="id">ID</p>
-                <p class="content" id="writter1"> </p>
-                <p id="top">Review</p>
-                <p class="content" id="reviewcontent2">
-                <p>
-                <p id="id">ID</p>
-                <p class="content" id="writter2"> </p>
-                <p id="top">Review</p>
-                <p class="content" id="reviewcontent3">
-                <p>
-                <p id="id">ID</p>
-                <p class="content" id="writter3"> </p>
-            </div>
       `
             }
             if (movie.id == sendid && today < releasedate) {
@@ -126,7 +108,7 @@ function clickDetails({ target }) {
     if (target.matches(".save")) {
         localStorage.setItem(writtercomment + sendid + "input", inputcomment)
         localStorage.setItem(writtercomment + sendid + "pw", passwordcomment)
-
+        if (!localStorage.getItem(sendid + 'writters')) { localStorage.setItem(sendid + 'writters', "|") }
         localStorage.setItem(sendid + 'writters', localStorage.getItem(sendid + 'writters') + "|" + writtercomment)
         localStorage.setItem('admin' + sendid, 'clear')
         location.reload()
