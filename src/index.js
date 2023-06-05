@@ -126,7 +126,7 @@ export function clickAllChart({ target }) {
     }
     else if (target.matches(".details")) {
         // alert(`영화 ID : ${target.id}`);
-        window.localStorage.setItem("movieid", `${target.id}`)
+        window.localStorage.setItem("movieid",`${target.id}`);
         window.open('detail.html')
     }
 
