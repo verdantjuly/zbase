@@ -1,4 +1,4 @@
-import { lovefunc } from "./lovefunc.js";
+
 import { searchfunc } from "./search.js";
 import { desktopSwitch, mobileSwitch } from "./switch.js";
 
@@ -27,6 +27,8 @@ mobilebtn.addEventListener("click", mobileSwitch);
 const desktopbtn = document.getElementById("desktopbtn");
 desktopbtn.addEventListener("click", desktopSwitch);
 
+
+
 function load() {
 
 
@@ -54,12 +56,7 @@ function load() {
                     localStorage.setItem(movieid, 'b');
                 }
                 else {
-                    if (!m.get(movieid)) {
-                        m.set(movieid, '');
-                    }
-                    movies[i].love = m.get(movieid)
-                    localStorage.setItem(movieid, localStorage.getItem(movieid) + m.get(movieid));
-                    movies[i].loverank = localStorage.getItem(movieid)
+                    movies[i].love = localStorage.getItem(movieid)
                 }
             }
 
@@ -95,7 +92,7 @@ function load() {
                     <p class="allvote" id="${movie.id}"  >★ ${movie.vote_average}</p>  
                     </div>
                     <h4 class="alltitle" id="${movie.id}" >${movie.title}</h4> 
-                    <p class="alltime" id="${movie.id}">${((localStorage.getItem(movie.id)).length) - 1} people loved this movie</p>   
+                    <p class="alltime" id="${movie.id}">${localStorage.getItem(movie.id).replace('b', "").length} people loved this movie</p>   
                 </div>
                 <div class = "buttons">
                 <button class = "lovebtn" id="${movie.id}" type="button">♥︎</button>
@@ -119,10 +116,11 @@ export function clickAllChart({ target }) {
     if (target === cards) return;
 
     if (target.matches(".lovebtn")) {
-        lovefunc(target.id)
+        localStorage.setItem(target.id, localStorage.getItem(target.id) + 'a')
         load()
         location.reload()
     }
+
     else if (target.matches(".cardbody, .alltime, .allimg, .alltitle, .allvote")) {
         alert(`영화 ID : ${target.id}`);
     }
@@ -134,15 +132,10 @@ function my() {
 
     document.getElementById("cards").innerHTML = ""
 
-    for (let i = 0; i < movies.length; i++) {
-        movies[i].love = m.get(movies[i]['id'])
-        if (!movies[i].love) { movies[i].love = 0 }
-    }
-
 
     movies.sort(function (a, b) {
 
-        if (b.loverank.length === a.loverank.length) {
+        if (b.love.length === a.love.length) {
 
             if (a.title < b.title) {
                 return -1;
@@ -153,7 +146,7 @@ function my() {
             }
 
         } else {
-            return b.loverank.length - a.loverank.length;
+            return b.love.length - a.love.length;
         }
     })
 
@@ -169,7 +162,7 @@ function my() {
                 <p class="allvote" id="${movie.id}"  >★ ${movie.vote_average}</p>  
                 </div>
                 <h4 class="alltitle" id="${movie.id}" >${movie.title}</h4> 
-                <p class="alltime" id="${movie.id}">${((localStorage.getItem(movie.id)).length) - 1} people loved this movie</p>   
+                <p class="alltime" id="${movie.id}">${localStorage.getItem(movie.id).replace('b', "").length} people loved this movie</p>   
             </div>
             <div class = "buttons">
             <button class="details" id="${movie.id} type="button">Details</button>

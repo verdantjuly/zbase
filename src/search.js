@@ -32,7 +32,6 @@ export function searchfunc() {
                 <p class="alltime" id="${movie.id}">${((localStorage.getItem(movie.id)).length) - 1} people loved this movie</p>   
             </div>
             <div class = "buttons">
-            <button class = "lovebtn" id="${movie.id}" type="button">♥︎</button>
             <button class="details" id="${movie.id} type="button">Details</button>
             </div>
             </div>`)
