@@ -1,6 +1,7 @@
 #homebox {
     text-align: center;
-    padding: 50px 0px 50px 0px
+    padding: 50px 0px 50px 0px;
+    border-bottom: solid black 3px;
 }
 
 #home {
@@ -12,17 +13,154 @@
     font-style: italic;
     font-size: 20px;
     box-shadow: 2px 2px 2px 2px rgb(212, 212, 212);
+    border-radius: 30px;
 
+}
+
+#home:hover,
+#home:focuss {
+    background-color: white;
+    border: none;
+    width: 150px;
+    height: 50px;
+    color: black;
+    font-style: italic;
+    font-size: 20px;
+    box-shadow: 2px 2px 2px 2px rgb(212, 212, 212);
+    border-radius: 30px;
+
+}
+
+#container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#img {
+    width: 400px;
+    margin: 20px 20px 20px 20px;
 }
 
 #card {
-    background-color: aqua;
+
+    width: 440px
 }
 
 #overview {
-    background-color: green;
+
+    padding: 0px 20px 20px 20px;
+    width: 400px;
+    font-size: 20px;
+    margin: 0px 20px 20px 20px;
+
+
 }
 
 #review {
-    background-color: yellow;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 400px;
+    margin: 20px 20px 20px 20px;
+    padding: 30px 30px 30px 30px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.overviewtitle {
+    font-weight: 900;
+    font-size: 40px;
+}
+
+.alltime,
+.rate {
+    font-style: italic;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+#comment {
+    width: 340px;
+    height: 30px;
+}
+
+.login {
+    display: flex;
+    flex-direction: row;
+}
+
+#writter,
+#password {
+    width: 165px;
+    height: 30px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.save,
+.edit,
+.delete {
+    width: 115px;
+    height: 30px;
+    background-color: black;
+    color: white;
+    margin: 0px 0px 20px 0px;
+    font-style: italic;
+    font-weight: 900;
+    font-size: 15px;
+}
+
+.save:hover,
+.edit:hover,
+.delete:hover,
+.save:focus,
+.edit:focus,
+.delete:focus {
+    width: 115px;
+    height: 30px;
+    background-color: white;
+    color: black;
+    margin: 0px 0px 20px 0px;
+    font-style: italic;
+    font-weight: 900;
+    font-size: 15px;
+}
+
+#latestreview {
+    font-style: italic;
+    font-weight: 900;
+    font-size: 30px;
+    border-bottom: 2px solid black;
+}
+
+#top {
+    font-style: italic;
+    font-weight: 900;
+    font-size: 15px;
+    border-bottom: 1px solid black;
+    margin-top: 40px;
+}
+
+#content {
+    font-style: italic;
+    font-size: 15px;
+}
+
+#id {
+    font-style: italic;
+    font-weight: 900;
+    font-size: 15px;
+}
+
+.writterid {
+    font-style: italic;
+    font-weight: 900;
+    font-size: 15px;
 }

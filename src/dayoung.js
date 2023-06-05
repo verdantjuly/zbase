@@ -2,8 +2,10 @@ let movies = []
 const movie = {}
 const apikey = '9119f549275a23ec65b54dfd6152a086'
 const title = document.querySelector("#title");
-const detailcards = document.querySelector(".detailcards");
-const detailhome = document.getElementById("detailhome");
+const card = document.querySelector("#card");
+const overview = document.querySelector("#overview");
+const review = document.querySelector("#review");
+const home = document.getElementById("home");
 const reviewcontent1 = document.querySelector("#reviewcontent1");
 const reviewcontent2 = document.querySelector("#reviewcontent2");
 const reviewcontent3 = document.querySelector("#reviewcontent3");
@@ -11,13 +13,13 @@ const writter1 = document.querySelector("#writter1");
 const writter2 = document.querySelector("#writter2");
 const writter3 = document.querySelector("#writter3");
 let writterarray = []
-detailhome.addEventListener("click", gohome);
+home.addEventListener("click", gohome);
 function gohome() {
     location.href = "./index.html";
 }
 
 
-let sendid = localStorage.getItem('sendid')
+let sendid = localStorage.getItem('movieid')
 sendid = parseInt(sendid.replace(" type=", ""))
 
 document.addEventListener("DOMContentLoaded", detailload);
@@ -35,54 +37,85 @@ function detailload() {
 
             if (movie.id == sendid && today >= releasedate) {
                 title.innerHTML = `${movie.title}`
-                detailcards.innerHTML =
-                    `
-                        <div class= "card">
-                        
-                        <img class="allimg" id="${movie.id}"   src="https://image.tmdb.org/t/p/w500${movie.poster_path}"></img>
-                        <div class="cardbody" id="${movie.id}" >
-                        <h1 class="alltitle"  id="${movie.id}" >${movie.title}</h1>
-                        <p class="alltime" id="${movie.id}" >${((localStorage.getItem(movie.id)).length) - 1} people loved this movie</p>  
-                        <p class="allvote" id="${movie.id}" >★ ${movie.vote_average}</p>  
-                        <p class="overview" id="${movie.id}" >${movie.overview}</p>  
-                   
-                   <input id="comment" placeholder="please leave short review" autocomplete="off" autofocus></input>
-                        <div class = "login">
-                   <input id="writter" placeholder="id" autocomplete="off" >
-                       <input type="password" id="password" placeholder="password" autocomplete="off" >
-                       </div>
-                       <div class = "buttons">
-                   <button class="save" id="${movie.id}" type="button">Save</button>
-                   <button class="edit" id="${movie.id}" type=" button">Edit</button>
-                   <button class="delete" id="${movie.id}" type=" button">Delete</button>
-              </div>
-                 
-                  </div> 
-           
-                    `
+                overview.innerHTML =
+                    `<h1 class="alltitle"  id="${movie.id}" >${movie.title}</h1>
+                    <p class="alltime" id="${movie.id}" >${((localStorage.getItem(movie.id)).length) - 1} people loved this movie</p>  
+            <p class="rate" id="rate" >★ ${movie.vote_average}</p> 
+            <p class="overviewtitle">Overview</p>${movie.overview}`
+                card.innerHTML = `<img class="img" id="img"   src="https://image.tmdb.org/t/p/w500${movie.poster_path}"></img>`
+                review.innerHTML = `<input id="comment" placeholder="please leave short review" autocomplete="off" autofocus></input>
+                <div class = "login">
+           <input id="writter" placeholder="id" autocomplete="off" >
+               <input type="password" id="password" placeholder="password" autocomplete="off" >
+               </div>
+               <div class = "buttons">
+           <button class="save" id="${movie.id}" type="button">Save</button>
+           <button class="edit" id="${movie.id}" type=" button">Edit</button>
+           <button class="delete" id="${movie.id}" type=" button">Delete</button>
+      </div>
+      <div class="commentviewbox">
+                <p id="latestreview">Latest Review</p>
+                <p id="top">Review</p>
+                <p class="content" id="reviewcontent1">
+                <p>
+                <p id="id">ID</p>
+                <p class="content" id="writter1"> </p>
+                <p id="top">Review</p>
+                <p class="content" id="reviewcontent2">
+                <p>
+                <p id="id">ID</p>
+                <p class="content" id="writter2"> </p>
+                <p id="top">Review</p>
+                <p class="content" id="reviewcontent3">
+                <p>
+                <p id="id">ID</p>
+                <p class="content" id="writter3"> </p>
+            </div>
+      `
             }
             if (movie.id == sendid && today < releasedate) {
-                detailcards.innerHTML =
-                    `
-                        <div class= "card">
-                        
-                        <img class="allimg" id="${movie.id}"   src="https://image.tmdb.org/t/p/w500${movie.poster_path}"></img>
-                        <div class="cardbody" id="${movie.id}" >
-                        <h1 class="alltitle"  id="${movie.id}" >${movie.title}</h1>
-                        <p class="alltime" id="${movie.id}" >${((localStorage.getItem(movie.id)).length) - 1} people loved this movie</p>  
-                        <p class="allvote" id="${movie.id}" >★ ${movie.vote_average}</p>
-            }</p >  
-                        <p class="overview" id="${movie.id}" >${movie.overview}</p>  <br>
-                        <p class="unrelease" >해당 영화는 아직 개봉되지 않았습니다. <br>${lefttime}일 후에 개봉됩니다.<br>관람 후에 후기를 남겨 주세요.</p>  
-                 
-                  </div >
+                title.innerHTML = `${movie.title}`
+                overview.innerHTML =
+                    `<p class="alltime" id="${movie.id}" >${((localStorage.getItem(movie.id)).length) - 1} people loved this movie</p>  
+                <p class="allvote" id="${movie.id}" >★ ${movie.vote_average}</p> 
+                <p class="overviewtitle">Overview</p>${movie.overview}`
 
-                `
+                card.innerHTML = `<img class="img" id="img"   src="https://image.tmdb.org/t/p/w500${movie.poster_path}"></img>`
+
+                review.innerHTML = `<input id="comment" placeholder="please leave short review" autocomplete="off" autofocus></input>
+                <div class = "login">
+           <input id="writter" placeholder="id" autocomplete="off" >
+               <input type="password" id="password" placeholder="password" autocomplete="off" >
+               </div>
+               <div class = "buttons">
+           <button class="save" id="${movie.id}" type="button">Save</button>
+           <button class="edit" id="${movie.id}" type=" button">Edit</button>
+           <button class="delete" id="${movie.id}" type=" button">Delete</button>
+      </div>
+      <div class="commentviewbox">
+                <p id="latestreview">Latest Review</p>
+                <p id="top">Review</p>
+                <p class="content" id="reviewcontent1">
+                <p>
+                <p id="id">ID</p>
+                <p class="writterid" id="writter1"> </p>
+                <p id="top">Review</p>
+                <p class="content" id="reviewcontent2">
+                <p>
+                <p id="id">ID</p>
+                <p class="writterid" id="writter2"> </p>
+                <p id="top">Review</p>
+                <p class="content" id="reviewcontent3">
+                <p>
+                <p id="id">ID</p>
+                <p class="writterid" id="writter3"> </p>
+            </div>
+      `
             }
 
         })
 }
-detailcards.addEventListener("click", clickDetails)
+review.addEventListener("click", clickDetails)
 
 
 let writtersarray = (localStorage.getItem(sendid + 'writters')).split("|")
