@@ -19,7 +19,7 @@ function detail() {
             rows.forEach((a) => {
                 // console.log(a['id'])
                 if (a['id'] === parseInt(id)) {
-                    return 
+                    return
                 }
                 else {
                     console.log("false")
