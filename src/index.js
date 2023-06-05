@@ -98,8 +98,8 @@ function load() {
                     <p class="alltime" id="${movie.id}">${((localStorage.getItem(movie.id)).length) - 1} people loved this movie</p>   
                 </div>
                 <div class = "buttons">
-                <button class = "lovebtn" id="${movie.id}" type="button">♥︎</button>
-                <button class="details" id="${movie.id}" type="button">Details</button>
+                <button class ="lovebtn" id="${movie.id}" type="button">♥︎</button>
+                <button class="details" id="${movie.id}">Details</button>
                 </div>
                 </div>`)
                 })
@@ -125,6 +125,11 @@ export function clickAllChart({ target }) {
     }
     else if (target.matches(".cardbody, .alltime, .allimg, .alltitle, .allvote")) {
         alert(`영화 ID : ${target.id}`);
+    }
+    else if (target.matches(".details")) {
+        // alert(`영화 ID : ${target.id}`);
+        window.localStorage.setItem("movieid", `${target.id}`)
+        window.open('detail.html')
     }
 
 }
@@ -157,7 +162,6 @@ function my() {
         }
     })
 
-
     cards.innerHTML = movies
         .map(function append(movie) {
             if ((localStorage.getItem(movie.id)).length > 1) {
@@ -179,5 +183,4 @@ function my() {
         })
         .join("")
 }
-
 
