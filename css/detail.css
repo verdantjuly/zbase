@@ -1,0 +1,28 @@
+#homebox {
+    text-align: center;
+    padding: 50px 0px 50px 0px
+}
+
+#home {
+    background-color: black;
+    border: none;
+    width: 150px;
+    height: 50px;
+    color: white;
+    font-style: italic;
+    font-size: 20px;
+    box-shadow: 2px 2px 2px 2px rgb(212, 212, 212);
+
+}
+
+#card {
+    background-color: aqua;
+}
+
+#overview {
+    background-color: green;
+}
+
+#review {
+    background-color: yellow;
+}
