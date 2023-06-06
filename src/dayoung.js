@@ -39,7 +39,7 @@ function detailload() {
                 title.innerHTML = `${movie.title}`
                 overview.innerHTML =
                     `<h1 class="alltitle"  id="${movie.id}" >${movie.title}</h1>
-                    <p class="alltime" id="${movie.id}" >${((localStorage.getItem(movie.id)).length) - 1} people loved this movie</p>  
+                    <p class="alltime" id="${movie.id}" >${(localStorage.getItem(movie.id))} people loved this movie</p>  
             <p class="rate" id="rate" >★ ${movie.vote_average}</p> 
             <p class="overviewtitle">Overview</p>${movie.overview}`
                 card.innerHTML = `<img class="img" id="img"   src="https://image.tmdb.org/t/p/w500${movie.poster_path}"></img>`
@@ -58,7 +58,7 @@ function detailload() {
             if (movie.id == sendid && today < releasedate) {
                 title.innerHTML = `${movie.title}`
                 overview.innerHTML =
-                    `<p class="alltime" id="${movie.id}" >${((localStorage.getItem(movie.id)).length) - 1} people loved this movie</p>  
+                    `<p class="alltime" id="${movie.id}" >${(localStorage.getItem(movie.id))} people loved this movie</p>  
                 <p class="allvote" id="${movie.id}" >★ ${movie.vote_average}</p> 
                 <p class="overviewtitle">Overview</p>${movie.overview}`
 
