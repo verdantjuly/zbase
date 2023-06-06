@@ -76,6 +76,7 @@ function detailload() {
 
 
 
+
         })
     let writtersarray = (localStorage.getItem(sendid + 'writters')).split("|")
     console.log(writtersarray)
