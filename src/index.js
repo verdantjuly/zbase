@@ -1,3 +1,4 @@
+
 import { searchfunc } from "./search.js";
 import { desktopSwitch, mobileSwitch } from "./switch.js";
 
