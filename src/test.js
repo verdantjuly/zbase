@@ -1,5 +1,5 @@
 // dayoung
-let today = new Date();
+
 let movies = []
 const movie = {}
 const apikey = '9119f549275a23ec65b54dfd6152a086'
@@ -8,7 +8,7 @@ const card = document.querySelector("#card");
 const overview = document.querySelector("#overview");
 const review = document.querySelector("#review");
 const comment = document.querySelector("#comment");
-const home = document.querySelector("#home");
+const home = document.getElementById("home");
 let writterarray = []
 let showlefttime = ""
 home.addEventListener("click", gohome);
@@ -28,7 +28,7 @@ function detailload() {
     fetch(`https://api.themoviedb.org/3/movie/${sendid}?api_key=${apikey}`, { method: 'GET' })
         .then(response => response.json())
         .then(movie => {
-
+            let today = new Date();
             let release = movie.release_date
             let releasedate = new Date(release);
             let lefttime = Math.round((releasedate.getTime() - today.getTime()) / 86400000)
@@ -72,22 +72,20 @@ function detailload() {
 
 
         })
-    let writtersarray = (localStorage.getItem(sendid + 'writters')).split("|")
-    for (let i = writtersarray.length - 1; i > 1; i--) {
-        let p = `<p id="top">Review</p>
-                <p class="content" >
-                ${localStorage.getItem(writtersarray[i] + sendid + "input")}
-                </p>
-                <p id="id">ID</p>
-                <p class="content" >${writtersarray[i]} </p>
-                <p id="id">Reivew date</p>
-                <p class="content" >${localStorage.getItem(writtersarray[i] + sendid + "time")} </p>`
-
-        let div = document.createElement("div")
-        div.className = "commentviewbox"
-        div.innerHTML = p
-        comment.appendChild(div)
-    }
+    // let writtersarray = (localStorage.getItem(sendid + 'writters')).split("|")
+    // console.log(writtersarray)
+    // for (let i = writtersarray.length - 1; i > 1; i--) {
+    //     let p = `<p id="top">Review</p>
+    //             <p class="content" id="reviewcontent2">
+    //             ${localStorage.getItem(sendid + "inputcomment")}
+    //             </p>
+    //             <p id="id">ID</p>
+    //             <p class="content" id="writter2">${target.id + "writtercomment"} </p>`
+    //     let div = document.createElement("div")
+    //     div.className = "commentviewbox"
+    //     div.innerHTML = p
+    //     comment.appendChild(div)
+    // }
 
 }
 
@@ -106,31 +104,39 @@ function clickDetails({ target }) {
     if (target === review) return;
 
     if (target.matches(".save")) {
-        localStorage.setItem(writtercomment + sendid + "input", inputcomment)
-        localStorage.setItem(writtercomment + sendid + "pw", passwordcomment)
-        localStorage.setItem(writtercomment + sendid + "time", today.toString().slice(0, 24))
-        if (!localStorage.getItem(sendid + 'writters')) { localStorage.setItem(sendid + 'writters', "|") }
-        localStorage.setItem(sendid + 'writters', localStorage.getItem(sendid + 'writters') + "|" + writtercomment)
-        location.reload()
+
+
+        localStorage.setItem(writtercomment + target.id + "passwordcomment", passwordcomment);
+        localStorage.setItem(writtercomment + target.id + "inputcomment", inputcomment);
+
+
+
+        // if (localStorage.getItem("Allcomment") == null) { localStorage.setItem("Allcomment", "|") }
+        // localStorage.setItem("Allcomment", localStorage.getItem("Allcomment") + [target.id, writtercomment, passwordcomment, inputcomment]) //배열로 저장하려고 했음
+
+
+
+        let allWritters = localStorage.getItem("allWritters")
+        let arrayWritters = allWritters.split("|")
+        console.log(arrayWritters[0])
+
+        // let output = localStorage.getItem("namekey");
+
+        // const Parsedname = JSON.parse(output);
+
+
+        // 구분자가 필요한 이유! -> 영화 별로 저장해야한다
+        // 무비 아이디 별로 저장을한다.
+        // 저장해야할것이 3개.
+
     }
     else if (target.matches(".edit")) {
-        if (passwordcomment == localStorage.getItem(writtercomment + sendid + "pw")) {
-            localStorage.setItem(writtercomment + sendid + "input", inputcomment)
-            location.reload()
-        }
-        else if (passwordcomment !== localStorage.getItem(writtercomment + sendid + "pw")) { alert("비밀번호가 일치하지 않습니다.") }
+
     }
     else if (target.matches(".delete")) {
-        if (passwordcomment == localStorage.getItem(writtercomment + sendid + "pw")) {
-            localStorage.removeItem(writtercomment + sendid + "input");
-            localStorage.removeItem(writtercomment + sendid + "pw");
-            let newwritters = (localStorage.getItem(sendid + 'writters')).replace("|" + writtercomment, "")
-            localStorage.setItem(sendid + 'writters', newwritters)
-            location.reload()
 
-        }
-        else if (passwordcomment !== localStorage.getItem(writtercomment + sendid + "pw")) { alert("비밀번호가 일치하지 않습니다.") }
     }
+
 
 }
 
