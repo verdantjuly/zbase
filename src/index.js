@@ -18,7 +18,7 @@ const allchart = document.getElementById("allchart");
 allchart.addEventListener("click", load);
 
 const mychart = document.getElementById("mychart");
-mychart.addEventListener("click", my);
+mychart.addEventListener("click", loved);
 
 const mobilebtn = document.getElementById("mobilebtn");
 mobilebtn.addEventListener("click", mobileSwitch);
@@ -52,7 +52,7 @@ function load() {
             for (let i = 0; i < movies.length; i++) {
                 let movieid = movies[i]['id']
                 if (!(localStorage.getItem(movieid))) {
-                    localStorage.setItem(movieid, 'b');
+                    localStorage.setItem(movieid, '0');
                 }
                 else {
                     movies[i].love = localStorage.getItem(movieid)
@@ -60,15 +60,15 @@ function load() {
             }
 
 
-            movies.sort(function (a, b) {
+            movies.sort(function (prev, next) {
 
 
-                if (b.vote_average === a.vote_average) {
+                if (next.vote_average === prev.vote_average) {
 
 
-                    if (a.title < b.title) {
+                    if (prev.title < next.title) {
                         return -1;
-                    } else if (a.title > b.title) {
+                    } else if (prev.title > next.title) {
                         return 1;
                     } else {
                         return 0;
@@ -76,7 +76,7 @@ function load() {
 
 
                 } else {
-                    return b.vote_average - a.vote_average;
+                    return next.vote_average - prev.vote_average;
                 }
             });
 
@@ -115,7 +115,7 @@ export function clickAllChart({ target }) {
     if (target === cards) return;
 
     if (target.matches(".lovebtn")) {
-        localStorage.setItem(target.id, localStorage.getItem(target.id) + 'a')
+        localStorage.setItem(target.id, Number(localStorage.getItem(target.id)) + 1)
         load()
         location.reload()
     }
@@ -132,25 +132,25 @@ export function clickAllChart({ target }) {
 }
 
 
-function my() {
+function loved() {
 
     document.getElementById("cards").innerHTML = ""
 
 
-    movies.sort(function (a, b) {
+    movies.sort(function (prev, next) {
 
-        if (b.love.length === a.love.length) {
+        if (next.love.length === prev.love.length) {
 
-            if (a.title < b.title) {
+            if (prev.title < next.title) {
                 return -1;
-            } else if (a.title > b.title) {
+            } else if (prev.title > next.title) {
                 return 1;
             } else {
                 return 0;
             }
 
         } else {
-            return b.love.length - a.love.length;
+            return next.love.length - prev.love.length;
         }
     })
 
