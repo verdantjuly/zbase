@@ -128,6 +128,7 @@ function clickDetails({ target }) {
         if (passwordcomment == localStorage.getItem(writtercomment + sendid + "pw")) {
             localStorage.removeItem(writtercomment + sendid + "input");
             localStorage.removeItem(writtercomment + sendid + "pw");
+            localStorage.removeItem(writtercomment + sendid + "time");
             let newwritters = (localStorage.getItem(sendid + 'writters')).replace("|" + writtercomment, "")
             localStorage.setItem(sendid + 'writters', newwritters)
             location.reload()
