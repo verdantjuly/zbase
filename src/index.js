@@ -82,6 +82,7 @@ function load() {
             });
 
 
+
             cards.innerHTML = movies
                 .map(function append(movie) {
                     return (`<div class= "card">      
