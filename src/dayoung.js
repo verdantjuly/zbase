@@ -1,11 +1,11 @@
 let movies = []
 const movie = {}
-let writtersarray = []
 const apikey = '9119f549275a23ec65b54dfd6152a086'
 const title = document.querySelector("#title");
 const card = document.querySelector("#card");
 const overview = document.querySelector("#overview");
 const review = document.querySelector("#review");
+const comment = document.querySelector("#comment");
 const home = document.getElementById("home");
 const reviewcontent1 = document.querySelector("#reviewcontent1");
 const reviewcontent2 = document.querySelector("#reviewcontent2");
@@ -77,22 +77,25 @@ function detailload() {
 
 
         })
-
+    let writtersarray = (localStorage.getItem(sendid + 'writters')).split("|")
+    console.log(writtersarray)
+    for (let i = writtersarray.length - 1; i > 1; i--) {
+        let p = `<p id="top">Review</p>
+                <p class="content" id="reviewcontent2">
+                ${localStorage.getItem(writtersarray[i] + sendid + "input")}
+                </p>
+                <p id="id">ID</p>
+                <p class="content" id="writter2">${writtersarray[i]} </p>`
+        let div = document.createElement("div")
+        div.className = "commentviewbox"
+        div.innerHTML = p
+        comment.appendChild(div)
+    }
 
 }
 
 review.addEventListener("click", clickDetails)
-if (!localStorage.getItem(sendid + 'writters')) { localStorage.setItem(sendid + 'writters', "|") }
-writtersarray = (localStorage.getItem(sendid + 'writters')).split("|")
-writter1.innerHTML = writtersarray[writtersarray.length - 1]
-writter2.innerHTML = writtersarray[writtersarray.length - 2]
-writter3.innerHTML = writtersarray[writtersarray.length - 3]
-reviewcontent1.innerHTML = localStorage.getItem(writtersarray[writtersarray.length - 1] + sendid + "input")
-reviewcontent2.innerHTML = localStorage.getItem(writtersarray[writtersarray.length - 2] + sendid + "input")
-reviewcontent3.innerHTML = localStorage.getItem(writtersarray[writtersarray.length - 3] + sendid + "input")
-if (writtersarray[writtersarray.length - 1] == undefined) { writter1.innerHTML = "" }
-if (writtersarray[writtersarray.length - 2] == undefined) { writter2.innerHTML = "" }
-if (writtersarray[writtersarray.length - 3] == undefined) { writter3.innerHTML = "" }
+
 
 
 function clickDetails({ target }) {
@@ -110,7 +113,6 @@ function clickDetails({ target }) {
         localStorage.setItem(writtercomment + sendid + "pw", passwordcomment)
         if (!localStorage.getItem(sendid + 'writters')) { localStorage.setItem(sendid + 'writters', "|") }
         localStorage.setItem(sendid + 'writters', localStorage.getItem(sendid + 'writters') + "|" + writtercomment)
-        localStorage.setItem('admin' + sendid, 'clear')
         location.reload()
     }
     else if (target.matches(".edit")) {
