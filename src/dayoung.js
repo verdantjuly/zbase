@@ -1,3 +1,5 @@
+// dayoung
+
 let movies = []
 const movie = {}
 const apikey = '9119f549275a23ec65b54dfd6152a086'
@@ -73,8 +75,6 @@ function detailload() {
       <p class="unrelease" >해당 영화는 아직 개봉되지 않았습니다. <br>${showlefttime}일 후에 개봉됩니다.<br>관람 후에 후기를 남겨 주세요.</p>  
       `
             }
-
-
 
 
         })
