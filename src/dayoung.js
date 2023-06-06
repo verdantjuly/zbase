@@ -106,6 +106,7 @@ function clickDetails({ target }) {
     if (target === review) return;
 
     if (target.matches(".save")) {
+        today = new Date();
         localStorage.setItem(writtercomment + sendid + "input", inputcomment)
         localStorage.setItem(writtercomment + sendid + "pw", passwordcomment)
         localStorage.setItem(writtercomment + sendid + "time", today.toString().slice(0, 24))
@@ -114,7 +115,10 @@ function clickDetails({ target }) {
         location.reload()
     }
     else if (target.matches(".edit")) {
+
+        today = new Date();
         if (passwordcomment == localStorage.getItem(writtercomment + sendid + "pw")) {
+            localStorage.setItem(writtercomment + sendid + "time", today.toString().slice(0, 24))
             localStorage.setItem(writtercomment + sendid + "input", inputcomment)
             location.reload()
         }
