@@ -141,7 +141,7 @@ function loved() {
 
     movies.sort(function (prev, next) {
 
-        if (next.love.length === prev.love.length) {
+        if (next.love === prev.love) {
 
             if (prev.title < next.title) {
                 return -1;
@@ -152,7 +152,7 @@ function loved() {
             }
 
         } else {
-            return next.love.length - prev.love.length;
+            return next.love - prev.love;
         }
     })
 
