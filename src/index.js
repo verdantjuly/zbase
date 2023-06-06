@@ -115,7 +115,7 @@ export function clickAllChart({ target }) {
     if (target === cards) return;
 
     if (target.matches(".lovebtn")) {
-        localStorage.setItem(target.id, localStorage.getItem(target.id) + 'a')
+        localStorage.setItem(target.id, Number(localStorage.getItem(target.id)) + 1)
         load()
         location.reload()
     }
