@@ -83,12 +83,6 @@ function clickDetails({ target }) {
         
 }}
 
-home.addEventListener("click", clickhome);
-
-function clickhome () {
-    alert("test")
-}
-
 // 갑시다
 //뭐를 포문으로 돌려달라고 말씀하신거죵?
 //이걸 for문으로 돌려서 붙일 거예용
