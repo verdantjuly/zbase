@@ -76,3 +76,20 @@ function clickDetails({ target }) {
 function clickhome() {
   location.href = "index.html"
 }
+
+let writtersarray = (localStorage.getItem(sendid + 'writters')).split("|")
+
+for (i=0; i < writtersarray.length - 1; i++) {
+  let p = `<p id="top">Review</p>
+                <p class="content" >
+                ${localStorage.getItem(writtersarray[i] + sendid + "input")}
+                </p>
+                <p id="id">ID</p>
+                <p class="content" >${writtersarray[i]} </p>
+                <p id="id">Reivew date</p>
+                <p class="content" >${localStorage.getItem(writtersarray[i] + sendid + "time")} </p>`
+                let divBox = document.createElement('div')
+                divBox.className('divBoxClass')
+                divBox.innerHTML = p
+                comment.appendChild(divBox)
+}
