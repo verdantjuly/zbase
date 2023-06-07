@@ -38,15 +38,15 @@ function detailload() {
 
 detailload();
 
+home.addEventListener("click", clickhome);
+
 reivew.addEventListener("click", clickDetails);
 
 function clickDetails({ target }) {
 
-
     let inputcomment = document.querySelector("#comment").value
     let writtercomment = document.querySelector("#writter").value
     let passwordcomment = document.querySelector("#password").value
-
 
     if (target === review) return;
 
@@ -59,8 +59,6 @@ function clickDetails({ target }) {
               writtercomment + target.id + "inputcomment",
               inputcomment
             );
-          
-          
             if (localStorage.getItem("allWritters") == null) {
               localStorage.setItem("allWritters", "|");
             }
@@ -69,44 +67,12 @@ function clickDetails({ target }) {
               localStorage.getItem("allWritters") + "|" + writtercomment
             );
             location.reload()
-          
-          } 
-
-    
+          }
     else if (target.matches(".edit")) {
-
-        
-
-        
     }
     else if (target.matches(".delete")) {
-        
 }}
 
-// 갑시다
-//뭐를 포문으로 돌려달라고 말씀하신거죵?
-//이걸 for문으로 돌려서 붙일 거예용
-// 가운데 조건은 우리가 작성한 만큼 붙일 거예요 일단은
-// 그렇게 하려면 작성자가 모여 있는 배열의 length를 가져와 주면 됩니다
-// 작성자가 모여 있는 배열은 writtersarray로 제가 만들었어요
-// 안돼~~~
-
-let p = `<p id="top">Review</p>
-<p class="content" >
-${localStorage.getItem(writtersarray[i] + sendid + "input")}
-</p>
-<p id="id">ID</p>
-<p class="content" >${writtersarray[i]} </p>
-<p id="id">Reivew date</p>
-<p class="content" >${localStorage.getItem(writtersarray[i] + sendid + "time")} </p>`
-
-for (let i=0; i < writterarray.length ; i++)
-
-// git add .
-// git checkout -b LEC
-// git
-
-
-
-
-
+function clickhome() {
+  location.href = "index.html"
+}
