@@ -16,7 +16,6 @@ function gohome() {
     location.href = "./index.html";
 }
 
-
 let sendid = localStorage.getItem('movieid')
 sendid = parseInt(sendid.replace(" type=", ""))
 
