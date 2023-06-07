@@ -81,7 +81,7 @@ function load() {
                                 <div class="opacbox" style="position: absolute; z-index: 2;">
                                     <p class="alltitle" id="${movie.id}">${movie.title}</p>
                                     <p class="allvote" id="${movie.id}">평점 : ★ ${movie.vote_average}</p>
-                                    <p class="allpopularity" id="${movie.id}">관객수 : ${movie.popularity}명</p>
+                                    <p class="allpopularity" id="${movie.id}">인기도 : ${movie.popularity}</p>
                                     <p class="allrelease_date" id="${movie.id}">개봉일 : ${movie.release_date}</p>
                                 </div>
                             <div class="imgbox">
