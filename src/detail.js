@@ -1,4 +1,4 @@
-const sendid = window.localStorage.getItem("movieid")
+const sendid = localStorage.getItem("movieid")
 console.log(sendid)
 const apikey = '9119f549275a23ec65b54dfd6152a086'
 let today = new Date();
@@ -10,20 +10,28 @@ const overview = document.querySelector("#overview");
 const review = document.querySelector("#review");
 const comment = document.querySelector("#comment");
 const home = document.querySelector("#home");
-let writterarray = []
+let writtersarray = []
 let showlefttime = ""
 function detailload() {
   fetch(`https://api.themoviedb.org/3/movie/${sendid}?api_key=${apikey}`, { method: 'GET' })
     .then(response => response.json())
     .then(movie => {
-      title.innerHTML = `${movie.title}`
-      overview.innerHTML =
-        `<h1 class="alltitle"  id="${movie.id}" >${movie.title}</h1>
+
+      let release = movie.release_date
+      let releasedate = new Date(release);
+      let lefttime = Math.round((releasedate.getTime() - today.getTime()) / 86400000)
+      if (1 > lefttime > 0) { showlefttime = lefttime.toString().replace("0", "내") }
+      else { showlefttime = lefttime }
+
+      if (movie.id == sendid && today >= releasedate) {
+        title.innerHTML = `${movie.title}`
+        overview.innerHTML =
+          `<h1 class="alltitle"  id="${movie.id}" >${movie.title}</h1>
             <p class="alltime" id="${movie.id}" >${(localStorage.getItem(movie.id))} people loved this movie</p>  
             <p class="rate" id="rate" >★ ${movie.vote_average}</p> 
             <p class="overviewtitle">Overview</p>${movie.overview}`
-      card.innerHTML = `<img class="img" id="img"   src="https://image.tmdb.org/t/p/w500${movie.poster_path}"></img>`
-      review.innerHTML = `<input id="comment" placeholder="please leave short review" autocomplete="off" autofocus></input>
+        card.innerHTML = `<img class="img" id="img"   src="https://image.tmdb.org/t/p/w500${movie.poster_path}"></img>`
+        review.innerHTML = `<input id="comment" placeholder="please leave short review" autocomplete="off" autofocus></input>
             <div class = "login">
                 <input id="writter" placeholder="id" autocomplete="off" >
                 <input type="password" id="password" placeholder="password" autocomplete="off" >
@@ -32,15 +40,32 @@ function detailload() {
                 <button class="save" id="${movie.id}" type="button">Save</button>
                 <button class="edit" id="${movie.id}" type=" button">Edit</button>
                 <button class="delete" id="${movie.id}" type=" button">Delete</button>
-            </div>`
+            </div>`}
+      if (movie.id == sendid && today < releasedate) {
+
+        title.innerHTML = `${movie.title}`
+        overview.innerHTML =
+          `<p class="alltime" id="${movie.id}" >${(localStorage.getItem(movie.id))} people loved this movie</p>  
+          <p class="allvote" id="${movie.id}" >★ ${movie.vote_average}</p> 
+          <p class="overviewtitle">Overview</p>${movie.overview}`
+
+        card.innerHTML = `<img class="img" id="img"   src="https://image.tmdb.org/t/p/w500${movie.poster_path}"></img>`
+
+        review.innerHTML = `<p class="unrelease" >해당 영화는 아직 개봉되지 않았습니다. <br>${showlefttime}일 후에 개봉됩니다.<br>관람 후에 후기를 남겨 주세요.</p>`
+      }
     })
 }
 
 detailload();
 
 home.addEventListener("click", clickhome);
+function clickhome() {
+  location.href = "index.html"
+}
 
 review.addEventListener("click", clickDetails);
+
+if (!localStorage.getItem(sendid + "allWritters")) { localStorage.setItem(sendid + "allWritters", "|"); }
 
 function clickDetails({ target }) {
 
@@ -51,44 +76,43 @@ function clickDetails({ target }) {
   if (target === review) return;
 
   if (target.matches(".save")) {
-    localStorage.setItem(
-      writtercomment + target.id + "passwordcomment",
-      passwordcomment
-    );
-    localStorage.setItem(
-      writtercomment + target.id + "inputcomment",
-      inputcomment
-    );
-    if (localStorage.getItem("allWritters") == null) {
-      localStorage.setItem("allWritters", "|");
-    }
-    localStorage.setItem(
-      "allWritters",
-      localStorage.getItem("allWritters") + "|" + writtercomment
-    );
-    location.reload()
-  }
-  else if (target.matches(".edit")) {
-    if (target.matches(".edit")) {
-      // 비밀번호가 저장된 비밀번호와 일치할 때 수정을 해준다
-      // 정보를 덮어씌운다
-      if (passwordcomment == localStorage.getItem(writtercomment + sendid + "pw")) {
-        localStorage.setItem(writtercomment + sendid + "input", inputcomment)
-      }
+    if (!localStorage.getItem(writtercomment + sendid + "pw", passwordcomment)) {
+      today = new Date();
+      localStorage.setItem(writtercomment + sendid + "pw", passwordcomment);
+      localStorage.setItem(writtercomment + sendid + "input", inputcomment);
+      localStorage.setItem(writtercomment + sendid + "time", today.toString().slice(0, 24))
       location.reload()
+      localStorage.setItem(sendid + "allWritters", localStorage.getItem(sendid + "allWritters") + "|" + writtercomment);
+    } else { alert("중복 ID를 생성할 수 없습니다.") }
+  }
+
+  else if (target.matches(".edit")) {
+    today = new Date();
+    if (passwordcomment == localStorage.getItem(writtercomment + sendid + "pw")) {
+      localStorage.setItem(writtercomment + sendid + "input", inputcomment)
+      localStorage.setItem(writtercomment + sendid + "time", today.toString().slice(0, 24))
+      location.reload()
+    }
+    else if (passwordcomment !== localStorage.getItem(writtercomment + sendid + "pw")) {
+      alert("비밀번호가 일치하지 않습니다.")
     }
   }
   else if (target.matches(".delete")) {
+    if (passwordcomment == localStorage.getItem(writtercomment + sendid + "pw")) {
+      localStorage.removeItem(writtercomment + sendid + "pw");
+      localStorage.removeItem(writtercomment + sendid + "input");
+      localStorage.removeItem(writtercomment + sendid + "time");
+      let newwritters = (localStorage.getItem(sendid + "allWritters")).replace("|" + writtercomment, "")
+      localStorage.setItem(sendid + "allWritters", newwritters)
+      location.reload()
+
+    }
+    else if (passwordcomment !== writtercomment + target.id + "pw") { alert("비밀번호가 일치하지 않습니다.") }
   }
 }
 
-function clickhome() {
-  location.href = "index.html"
-}
-
-let writtersarray = (localStorage.getItem(sendid + 'writters')).split("|")
-
-for (let i = 0; i < writtersarray.length - 1; i++) {
+writtersarray = localStorage.getItem(sendid + 'allWritters').split("|")
+for (let i = writtersarray.length - 1; i > 1; i--) {
   let p = `<p id="top">Review</p>
                 <p class="content" >
                 ${localStorage.getItem(writtersarray[i] + sendid + "input")}

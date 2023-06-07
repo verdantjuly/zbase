@@ -88,7 +88,6 @@ function detailload() {
         div.innerHTML = p
         comment.appendChild(div)
     }
-
 }
 
 review.addEventListener("click", clickDetails)
@@ -115,7 +114,6 @@ function clickDetails({ target }) {
         location.reload()
     }
     else if (target.matches(".edit")) {
-
         today = new Date();
         if (passwordcomment == localStorage.getItem(writtercomment + sendid + "pw")) {
             localStorage.setItem(writtercomment + sendid + "time", today.toString().slice(0, 24))

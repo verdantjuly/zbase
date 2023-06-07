@@ -20,10 +20,10 @@
 
 .cards {
 
-    display: flex;
-    align-content: flex-start;
-    flex-wrap: wrap;
-
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
 }
 
 .allimg {
