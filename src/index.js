@@ -158,7 +158,7 @@ function loved() {
 
     cards.innerHTML = movies
         .map(function append(movie) {
-            if (localStorage.getItem(movie.id) > 1) {
+            if (localStorage.getItem(movie.id) > 0) {
                 return (`<div class= "card">      
                 <div class="cardbody" id="${movie.id}" >
                 <img class="allimg" id="${movie.id}"  src="https://image.tmdb.org/t/p/w500${movie.poster_path}"></img>
