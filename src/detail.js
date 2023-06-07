@@ -120,9 +120,27 @@ for (let i = writtersarray.length - 1; i > 1; i--) {
                 <p id="id">ID</p>
                 <p class="content" >${writtersarray[i]} </p>
                 <p id="id">Reivew date</p>
-                <p class="content" >${localStorage.getItem(writtersarray[i] + sendid + "time")} </p>`
+                <p class="content" >${localStorage.getItem(writtersarray[i] + sendid + "time")} </p>
+                <button class="deletepopup" id="${sendid}" type=" button">Delete</button>
+                <div class="modal">
+                <div class="modal_body">
+                <div class = "login">
+                <input id="writter" placeholder="id" autocomplete="off" >
+                <input type="password" id="password" placeholder="password" autocomplete="off" >
+            </div>
+            <div class = "buttons">
+                <button class="deleteinmodal" id="${movie.id}" type=" button">Delete</button>
+            </div>
+                </div>
+              </div>`
   let divBox = document.createElement('div')
   divBox.className = 'divBoxClass'
   divBox.innerHTML = p
   comment.appendChild(divBox)
+  const modal = document.querySelector('.modal');
+  const deletepopup = document.querySelector('.deletepopup');
+  deletepopup.addEventListener('click', () => {
+    modal.style.display = 'block';
+    modal.classList.toggle('show');
+  });
 }
