@@ -1,4 +1,3 @@
-
 import { searchfunc } from "./search.js";
 import { desktopSwitch, mobileSwitch } from "./switch.js";
 
@@ -87,12 +86,18 @@ function load() {
                 .map(function append(movie) {
                     return (`<div class= "card">      
                     <div class="cardbody" id="${movie.id}" >
-                    <img class="allimg" id="${movie.id}"  src="https://image.tmdb.org/t/p/w500${movie.poster_path}"></img>
-                    <div class = rankvote>
-                    <p class="allrank" id="${movie.id}" >${movies.indexOf(movie) + 1}</p>
-                    <p class="allvote" id="${movie.id}"  >★ ${movie.vote_average}</p>  
+                    <div class="opacbox" style="position: absolute; z-index: 2;">
+                    <p class="alltitle" id="${movie.id}" >${movie.title}</p>
+                    <p class="allvote" id="${movie.id}"  >평점 : ★ ${movie.vote_average}</p>
+                    <p class="allpopularity" id="${movie.id}"  >관객수 : ${movie.popularity}명</p>
+                    <p class="allrelease_date" id="${movie.id}"  >개봉일 : ${movie.release_date}</p>
                     </div>
-                    <h4 class="alltitle" id="${movie.id}" >${movie.title}</h4> 
+                    <div class ="imgbox">
+                    <span class="allrank" id="${movie.id}" >${movies.indexOf(movie) + 1}</span>
+                    <img class="allimg" id="${movie.id}"  src="https://image.tmdb.org/t/p/w500${movie.poster_path}"></img>
+                    </div>
+                    <div class = "rankvote">
+                    </div>
                     <p class="alltime" id="${movie.id}">${localStorage.getItem(movie.id)} people loved this movie</p>   
                 </div>
                 <div class = "buttons">
@@ -177,4 +182,3 @@ function loved() {
         })
         .join("")
 }
-
