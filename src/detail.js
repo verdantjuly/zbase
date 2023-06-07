@@ -95,7 +95,7 @@ function clickhome () {
 // 가운데 조건은 우리가 작성한 만큼 붙일 거예요 일단은
 // 그렇게 하려면 작성자가 모여 있는 배열의 length를 가져와 주면 됩니다
 // 작성자가 모여 있는 배열은 writtersarray로 제가 만들었어요
-
+// 안돼~~~
 
 let p = `<p id="top">Review</p>
 <p class="content" >
