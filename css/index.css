@@ -63,11 +63,13 @@
     border-radius: 10%;
     background-color: firebrick;
     background: rgba(0, 0, 0, 0.5);
-    opacity: 0;
+    opacity: 0; 
+    /* 불투명도 설정 */
   }
   
   .card:hover .opacbox {
     opacity: 1;
+    /* 불투명도 설정 */
   }
   
   .allimg {
