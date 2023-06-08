@@ -36,7 +36,7 @@ function load() {
     fetch('https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1', options)
         .then(response => response.json())
         .then(data => {
-            
+
             //innerHTML = "" 를 통해 cards 안을 비워 준다. 
             document.getElementById("cards").innerHTML = ""
             let rows = data['results']
@@ -72,6 +72,14 @@ function load() {
                 }
             });
 
+            //prev, next 버튼 생성시 필요한 순위 데이터 localStorage 에 저장
+            let allmovies = []
+            for (let i = 0; i < movies.length; i++) {
+                allmovies.push(movies[i]["id"])
+                localStorage.setItem("rankof" + movies[i]["id"], allmovies.indexOf(movies[i]["id"]) + 1)
+                localStorage.setItem(i + 1, movies[i]["id"])
+            }
+
             // 카드 붙이기
             cards.innerHTML = movies
                 .map(function append(movie) {
@@ -101,7 +109,7 @@ function load() {
                 }).join("")
             cards.addEventListener("click", clickAllChart)
         })
-    
+
     // enter 를 누르면 search 버튼이 눌리게 한다.
     document.getElementById("search")
         .addEventListener("keyup", function (e) {
@@ -119,11 +127,6 @@ export function clickAllChart({ target }) {
     if (target.matches(".lovebtn")) {
         localStorage.setItem(target.id, Number(localStorage.getItem(target.id)) + 1)
         load()
-        location.reload()
-    }
-    // 카드 클릭하면 영화 id 를 반환한다.
-    else if (target.matches(".cardbody, .alltime, .allimg, .alltitle, .allvote")) {
-        alert(`영화 ID : ${target.id}`);
     }
     // details 버튼을 누르면 detail.html으로 이동한다. 
     else if (target.matches(".details")) {
@@ -154,21 +157,26 @@ function loved() {
         .map(function append(movie) {
             if (localStorage.getItem(movie.id) > 0) {
                 return (
-                `<div class= "card">      
-                    <div class="cardbody" id="${movie.id}">
-                        <img class="allimg" id="${movie.id}"  src="https://image.tmdb.org/t/p/w500${movie.poster_path}"></img>
-                    </div>
-                    <div class = rankvote>
-                        <p class="allrank" id="${movie.id}">${movies.indexOf(movie) + 1}</p>
-                        <p class="allvote" id="${movie.id}">★ ${movie.vote_average}</p>  
-                    </div>
-                        <h4 class="alltitle" id="${movie.id}">${movie.title}</h4> 
-                        <p class="alltime" id="${movie.id}">${localStorage.getItem(movie.id)} people loved this movie</p>   
-                    </div>
-                    <div class="buttons">
-                        <button class="details" id="${movie.id} type="button">Details</button>
-                    </div>
-                </div>`)
+                    `<div class="card">      
+                            <div class="cardbody" id="${movie.id}">
+                                <div class="opacbox" style="position: absolute; z-index: 2;">
+                                    <p class="alltitle" id="${movie.id}">${movie.title}</p>
+                                    <p class="allvote" id="${movie.id}">평점 : ★ ${movie.vote_average}</p>
+                                    <p class="allpopularity" id="${movie.id}">인기도 : ${movie.popularity}</p>
+                                    <p class="allrelease_date" id="${movie.id}">개봉일 : ${movie.release_date}</p>
+                                </div>
+                            <div class="imgbox">
+                                <span class="allrank" id="${movie.id}">${movies.indexOf(movie) + 1}</span>
+                                <img class="allimg" id="${movie.id}" src="https://image.tmdb.org/t/p/w500${movie.poster_path}"></img>
+                            </div>
+                            <div class="rankvote">
+                            </div>
+                                <p class="alltime" id="${movie.id}">${localStorage.getItem(movie.id)} people loved this movie</p>   
+                            </div>
+                            <div class="buttons">
+                                <button class="details" id="${movie.id}">Details</button>
+                            </div>
+                        </div>`)
             }
         }).join("")
 }
