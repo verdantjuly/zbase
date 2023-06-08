@@ -175,7 +175,9 @@ function clickDetails({ target }) {
       localStorage.removeItem(cid + target.id + "time");
       let newwritters = (localStorage.getItem(target.id + "allWritters")).replace("|" + cid, "");
       localStorage.setItem(target.id + "allWritters", newwritters);
-      location.reload;
+      sendid = target.id
+      detailload()
+      pastereview()
     }
     // 비밀번호가 일치하지 않는 경우 alert를 띄운다.
     else if (cpw !== cid + target.id + "pw") { alert("비밀번호가 일치하지 않습니다.") }
