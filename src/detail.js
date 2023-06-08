@@ -42,7 +42,7 @@ function detailload() {
                 <button class="delete" id="${movie.id}" type=" button">Delete</button>
             </div>`}
       if (movie.id == sendid && today < releasedate) {
-
+      // 42번째 줄은 삭제하고 다른 'delete'버튼에 연결해야 합니다!
         title.innerHTML = `${movie.title}`
         overview.innerHTML =
           `<p class="alltime" id="${movie.id}" >${(localStorage.getItem(movie.id))} people loved this movie</p>  
@@ -97,18 +97,18 @@ function clickDetails({ target }) {
       alert("비밀번호가 일치하지 않습니다.")
     }
   }
-  else if (target.matches(".delete")) {
-    if (passwordcomment == localStorage.getItem(writtercomment + sendid + "pw")) {
-      localStorage.removeItem(writtercomment + sendid + "pw");
-      localStorage.removeItem(writtercomment + sendid + "input");
-      localStorage.removeItem(writtercomment + sendid + "time");
-      let newwritters = (localStorage.getItem(sendid + "allWritters")).replace("|" + writtercomment, "")
-      localStorage.setItem(sendid + "allWritters", newwritters)
-      location.reload()
+  // else if (target.matches(".delete")) {
+  //   if (passwordcomment == localStorage.getItem(writtercomment + sendid + "pw")) {
+  //     localStorage.removeItem(writtercomment + sendid + "pw");
+  //     localStorage.removeItem(writtercomment + sendid + "input");
+  //     localStorage.removeItem(writtercomment + sendid + "time");
+  //     let newwritters = (localStorage.getItem(sendid + "allWritters")).replace("|" + writtercomment, "")
+  //     localStorage.setItem(sendid + "allWritters", newwritters)
+  //     location.reload()
 
-    }
-    else if (passwordcomment !== writtercomment + target.id + "pw") { alert("비밀번호가 일치하지 않습니다.") }
-  }
+  //   }
+  //   else if (passwordcomment !== writtercomment + target.id + "pw") { alert("비밀번호가 일치하지 않습니다.") }
+  // }
 }
 
 writtersarray = localStorage.getItem(sendid + 'allWritters').split("|")
@@ -121,7 +121,7 @@ for (let i = writtersarray.length - 1; i > 1; i--) {
     <p class="content">${writtersarray[i]}</p>
     <p id="id">Reivew date</p>
     <p class="content">${localStorage.getItem(writtersarray[i] + sendid + "time")}</p>
-    <button class="deletepopup" id="${sendid}" type="button">Delete to modal up!</button>`;
+    <button class="delete_to_modal" id="${sendid}" type="button">Delete</button>`;
 
   let divBox = document.createElement('div');
   divBox.className = 'divBoxClass';
@@ -129,28 +129,53 @@ for (let i = writtersarray.length - 1; i > 1; i--) {
   comment.appendChild(divBox);
 }
 
-
+// 'modal' 기능을 구현한 함수입니다.
 document.addEventListener('click', function(event) {
-  if (event.target.classList.contains('deletepopup')) {
+  if (event.target.classList.contains('delete_to_modal')) {
     console.log(`this is 'sendid' => ${sendid}`);
 
     let temp_html =
       `<div id="modal_up">
-        <div>
           <input id="user_id" placeholder="user ID" autocomplete="off"></input>
           <input id="user_pw" placeholder="user PW" autocomplete="off"></input>
-        </div>
-        <div>
-          <button class="deleteinmodal" id="${movie.id}" type="button">Delete</button>
-        </div>
+          <button class="delete_in_modal" id="${movie.id}" type="button">Delete</button>
       </div>`;
 
     document.getElementById('modal_container').insertAdjacentHTML('beforeend', temp_html);
     document.getElementById('modal').classList.add('active');
     document.getElementById('modal_up').classList.add('active');
   }
+
+  // 'review' 삭제 기능입니다.
+  const delete_in_modal = document.querySelector(".delete_in_modal");
+
+  delete_in_modal.addEventListener('click', function () {
+  
+    let writtercomment = document.querySelector("#user_id").value
+    console.log(`this is 'writtercomment' => ${writtercomment}`)
+    let passwordcomment = document.querySelector("#user_pw").value
+    console.log(`this is 'writtercomment' => ${passwordcomment}`)
+
+    console.log('hello!')
+  
+    if (passwordcomment == localStorage.getItem(writtercomment + sendid + "pw")) {
+
+      localStorage.removeItem(writtercomment + sendid + "pw");
+      localStorage.removeItem(writtercomment + sendid + "input");
+      localStorage.removeItem(writtercomment + sendid + "time");
+
+      let newwritters = (localStorage.getItem(sendid + "allWritters")).replace("|" + writtercomment, "")
+      localStorage.setItem(sendid + "allWritters", newwritters)
+
+      alert("삭제 완료 되었습니다!")
+      location.reload()
+    }
+    else if (passwordcomment !== writtercomment + sendid + "pw") { alert("비밀번호가 일치하지 않습니다.") }
+    }
+  )
 });
 
+// 'modal' 창을 닫히게 하는 함수입니다.
 document.addEventListener('click', function (event) {
   if (event.target.id === 'modal') {
     document.getElementById('modal').classList.remove('active');
