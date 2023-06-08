@@ -150,15 +150,17 @@ function clickDetails({ target }) {
   else if (target.matches(".edit")) {
     today = new Date();
     if (cpw == localStorage.getItem(cid + target.id + "pw")) {
+      console.log(target.id)
       localStorage.setItem(cid + target.id + "input", cinput)
       localStorage.setItem(cid + target.id + "time", today.toString().slice(0, 24))
       sendid = target.id
       detailload()
-      pastereview()()
+      pastereview()
     }
     // 비밀번호가 일치하지 않는 경우 alert를 띄운다.
     else if (cpw !== localStorage.getItem(cid + target.id + "pw")) {
       alert("비밀번호가 일치하지 않습니다.")
+      console.log(target.id)
       sendid = target.id
       detailload()
       pastereview()
