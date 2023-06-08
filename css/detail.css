@@ -30,20 +30,31 @@
 }
 
 #home:focus {
-    background-color: white;
     border: none;
     width: 150px;
     height: 50px;
-    color: black;
     font-style: italic;
     font-size: 20px;
     box-shadow: 2px 2px 2px 2px rgb(212, 212, 212);
     border-radius: 30px;
 }
 
+#home:active {
+    background-color: black;
+    border: none;
+    width: 150px;
+    height: 50px;
+    color: white;
+    font-style: italic;
+    font-size: 20px;
+    box-shadow: 2px 2px 2px 2px rgb(212, 212, 212);
+    border-radius: 30px;
+    border: 4px solid black;
+}
+
 #prev,
 #next {
-    background-color: white;
+    background-color: #fff;
     border: none;
     width: 100px;
     height: 50px;
@@ -56,6 +67,19 @@
 
 #prev:hover,
 #next:hover {
+    background-color: #000;
+    border: none;
+    width: 100px;
+    height: 50px;
+    color: #fff;
+    font-style: italic;
+    font-size: 15px;
+    box-shadow: 2px 2px 2px 2px rgb(212, 212, 212);
+    border-radius: 30px;
+}
+
+#prev:active,
+#next:active {
     background-color: #fff;
     border: none;
     width: 100px;
@@ -65,16 +89,13 @@
     font-size: 15px;
     box-shadow: 2px 2px 2px 2px rgb(212, 212, 212);
     border-radius: 30px;
-    border: 4px solid black;
 }
 
 #prev:focus,
 #next:focus {
-    background-color: white;
     border: none;
     width: 100px;
     height: 50px;
-    color: black;
     font-style: italic;
     font-size: 15px;
     box-shadow: 2px 2px 2px 2px rgb(212, 212, 212);
