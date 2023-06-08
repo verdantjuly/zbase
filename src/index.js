@@ -86,14 +86,14 @@ function load() {
                     return (
                         `<div class="card">      
                             <div class="cardbody" id="${movie.id}">
-                                <div class="opacbox" style="position: absolute; z-index: 2;">
+                                <div class="opacbox" id="${movie.id}" style="position: absolute; z-index: 2;">
                                     <p class="alltitle" id="${movie.id}">${movie.title}</p>
                                     <p class="allvote" id="${movie.id}">평점 : ★ ${movie.vote_average}</p>
                                     <p class="allpopularity" id="${movie.id}">인기도 : ${movie.popularity}</p>
                                     <p class="allrelease_date" id="${movie.id}">개봉일 : ${movie.release_date}</p>
                                 </div>
                             <div class="imgbox">
-                                <span class="allrank" id="${movie.id}">${movies.indexOf(movie) + 1}</span>
+                                <span class="allrank" >${movies.indexOf(movie) + 1}</span>
                                 <img class="allimg" id="${movie.id}" src="https://image.tmdb.org/t/p/w500${movie.poster_path}"></img>
                             </div>
                             <div class="rankvote">
@@ -128,7 +128,7 @@ export function clickAllChart({ target }) {
         localStorage.setItem(target.id, Number(localStorage.getItem(target.id)) + 1)
         load()
     }
-    // lovebtn2를 버튼을 누르면 detail.html으로 이동한다. 
+    // lovebtn2를 버튼을 누르면 love를 1 올린 뒤 seatchfunc를 작동한다. 
     else if (target.matches(".lovebtn2")) {
         localStorage.setItem(target.id, Number(localStorage.getItem(target.id)) + 1)
         searchfunc()
@@ -137,6 +137,10 @@ export function clickAllChart({ target }) {
     else if (target.matches(".details")) {
         localStorage.setItem("movieid", `${target.id}`);
         location.href = "./detail.html";
+    }
+    // 영화 포스터 opacboxx를 누르면 영화 id를 보여준다.
+    else if (target.matches(".opacbox")) {
+        alert("영화 ID : " + target.id)
     }
 }
 
