@@ -245,7 +245,6 @@ document.addEventListener('click', function (event) {
     }
   });
 })
-
 // 'modal' 창을 닫히게 하는 함수입니다.
 document.addEventListener('click', function (event) {
   if (event.target.id === 'modal') {
