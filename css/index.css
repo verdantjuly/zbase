@@ -45,6 +45,7 @@
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
   padding: 1rem;
+  margin-top: 50px;
 }
 
 .card {
@@ -58,7 +59,6 @@
 }
 
 .opacbox {
-  /* border-radius: 10%; */
   position: absolute;
   width: 250px;
   height: 375px;
@@ -66,20 +66,18 @@
   background-color: firebrick;
   background: rgba(0, 0, 0, 0.5);
   opacity: 0;
-  /* 불투명도 설정 */
 }
 
 .card:hover .opacbox {
   opacity: 1;
-  /* 불투명도 설정 */
 }
 
 .allimg {
   border-radius: 10%;
   width: 250px;
   height: 375px;
+  box-shadow: 5px 5px 5px 5px rgb(212, 212, 212);
 }
-
 
 .overview {
   width: 250px;
@@ -94,7 +92,8 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  justify-content: flex-start;
+  justify-content: center;
+  margin-top: 30px;
 }
 
 #search {
@@ -102,24 +101,35 @@
   margin: 15px 0px 0px 40px;
   padding: 10px 10px 10px 10px;
   width: 250px;
-
   outline-color: rgba(216, 216, 216, 0.902);
 }
 
 #searchbtn {
   margin-right: 20px;
+  width: 80px;
   height: 40px;
   font-size: 15px;
   color: white;
   background-color: black;
+  border-radius: 10%;
 }
 
 #searchbtn:hover {
   height: 40px;
   font-size: 15px;
+  color: #000;
+  background-color: #fff;
+  border: solid 4px #000;
+  border-radius: 10%;
+}
+
+#searchbtn:active {
+  height: 40px;
+  font-size: 15px;
   color: white;
   background-color: black;
-  border: solid 3px gray;
+  border: solid 4px #000;
+  border-radius: 10%;
 }
 
 #allchart,
@@ -135,8 +145,6 @@
   border-radius: 10%;
 }
 
-#allchart:focus,
-#mychart:focus,
 #allchart:hover,
 #mychart:hover {
   margin: 15px 2px 0px 2px;
@@ -144,8 +152,21 @@
   height: 40px;
   font-size: 20px;
   font-style: italic;
-  color: black;
-  background-color: white;
+  color: #000;
+  background-color: #fff;
+  border: 4px solid black;
+  border-radius: 10%;
+}
+
+#allchart:active,
+#mychart:active {
+  margin: 15px 2px 0px 2px;
+  width: 130px;
+  height: 40px;
+  font-size: 20px;
+  font-style: italic;
+  color: #fff;
+  background-color: #000;
   border: 4px solid black;
   border-radius: 10%;
 }
@@ -164,20 +185,34 @@
   border: none;
 }
 
-#mobilebtn:hover,
-#mobilebtn:focus {
+#mobilebtn:hover {
   margin: 20px 2px 0px 20px;
   width: 80px;
   height: 30px;
   border: solid 2px black;
 }
 
-#desktopbtn:hover,
-#desktopbtn:focus {
+#mobilebtn:active {
+  margin: 20px 2px 0px 20px;
+  width: 80px;
+  height: 30px;
+  border: solid 2px black;
+  background-color: aliceblue;
+}
+
+#desktopbtn:hover {
   margin: 20px 2px 0px 2px;
   width: 80px;
   height: 30px;
   border: solid 2px black;
+}
+
+#desktopbtn:active {
+  margin: 20px 2px 0px 2px;
+  width: 80px;
+  height: 30px;
+  border: solid 2px black;
+  background-color: aliceblue;
 }
 
 .lovebtn,
@@ -210,7 +245,6 @@
   margin-left: 20px;
 }
 
-
 .details {
   width: 70px;
   height: 30px;
@@ -231,4 +265,35 @@
   background-color: white;
   border: 4px solid black;
   border-radius: 10%;
+}
+
+.details:active {
+  width: 70px;
+  height: 30px;
+  font-size: 15px;
+  font-style: italic;
+  color: #fff;
+  background-color: #000;
+  border: 4px solid black;
+  border-radius: 10%;
+}
+
+.home {
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.home:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.home:active {
+  transform: scale(1);
+}
+
+footer {
+  display: flex;
+  justify-content: end;
+  margin-right: 20px;
 }

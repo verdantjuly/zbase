@@ -6,12 +6,10 @@ export function searchfunc() {
     document.getElementById("cards").innerHTML = ""
     let searchString = document.querySelector("#search").value
     let noarray = [];
-
     // 검색어가 없으면 alert를 띄운다.
     if (searchString == false) {
         alert("검색어를 입력하세요!")
     }
-
     // 검색어가 일치하지 않으면 alert를 띄운다.
     let upperSearch = searchString.toUpperCase()
     for (let i = 0; i < movies.length; i++) {
@@ -22,6 +20,7 @@ export function searchfunc() {
     })
     if (filteredtitlearray.length == 0) {
         alert("찾으시는 영화가 없습니다!")
+        return location.reload();
     }
     // 영화 cards 그리기
     cards.innerHTML = movies
