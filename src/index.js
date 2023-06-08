@@ -138,7 +138,7 @@ export function clickAllChart({ target }) {
         localStorage.setItem("movieid", `${target.id}`);
         location.href = "./detail.html";
     }
-    // 영화 포스터 opacboxx를 누르면 영화 id를 보여준다.
+    // 영화 포스터 opacbox를 누르면 영화 id를 보여준다.
     else if (target.matches(".opacbox")) {
         alert("영화 ID : " + target.id)
     }
