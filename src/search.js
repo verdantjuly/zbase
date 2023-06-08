@@ -46,7 +46,7 @@ export function searchfunc() {
                                 <p class="alltime" id="${movie.id}">${localStorage.getItem(movie.id)} people loved this movie</p>   
                             </div>
                             <div class="buttons">
-                                <button class="lovebtn" id="${movie.id}" type="button">♥︎</button>
+                                <button class="lovebtn2" id="${movie.id}" type="button">♥︎</button>
                                 <button class="details" id="${movie.id}">Details</button>
                             </div>
                         </div>`)
