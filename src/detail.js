@@ -25,13 +25,17 @@ next.addEventListener("click", nextfunc);
 
 function prevfunc() {
   let ranknum = parseInt(localStorage.getItem("rankof" + sendid)) - 1
-  sendid = localStorage.getItem(ranknum)
-  detailload()
+  if (ranknum > 0) {
+    sendid = localStorage.getItem(ranknum)
+    detailload()
+  } else { alert("제일 처음 영화입니다.") }
 }
 function nextfunc() {
   let ranknum = parseInt(localStorage.getItem("rankof" + sendid)) + 1
-  sendid = localStorage.getItem(ranknum)
-  detailload()
+  if (ranknum < 21) {
+    sendid = localStorage.getItem(ranknum)
+    detailload()
+  } else { alert("제일 마지막 영화입니다.") }
 }
 
 
@@ -117,7 +121,16 @@ function clickDetails({ target }) {
 
   // save 버튼을 누르면 실행됨( 비밀번호, 댓글, 작성시간을 저장 )
   if (target.matches(".save")) {
-    if (!localStorage.getItem(cid + sendid + "pw", cpw)) {
+    // ID를 입력하지 않았을 경우 alert를 띄운다.
+    if (!cid) { alert("ID를 입력해주세요.") }
+    // PW를 입력하지 않았을 경우 alert를 띄운다.
+    else if (!cpw) { alert("비밀번호를 입력해주세요.") }
+    // INPUT를 입력하지 않았을 경우 alert를 띄운다.
+    else if (!cinput) { alert("내용을 입력해주세요.") }
+    // 같은 아이디가 있는 경우 중복 ID 생성을 방지한다.
+    else if (cpw == localStorage.getItem(cid + sendid + "pw", cpw)) { alert("중복 ID를 생성할 수 없습니다.") }
+    // 위의 경우가 모두 안닌 경우 ID 생성을 허가한다.
+    else if (!localStorage.getItem(cid + sendid + "pw", cpw)) {
       today = new Date();
       localStorage.setItem(cid + sendid + "pw", cpw);
       localStorage.setItem(cid + sendid + "input", cinput);
@@ -126,8 +139,6 @@ function clickDetails({ target }) {
       // 작성자를 아까 만든 key에 save 할 때 마다 덧붙여 저장한다. 이 때 구분자는 "|" 로 준다. 
       localStorage.setItem(sendid + "allWritters", localStorage.getItem(sendid + "allWritters") + "|" + cid);
     }
-    // 같은 아이디가 있는 경우 중복 ID 생성을 방지한다.
-    else { alert("중복 ID를 생성할 수 없습니다.") }
   }
 
   // edit 버튼을 누르면 실행됨
@@ -153,7 +164,7 @@ function clickDetails({ target }) {
       localStorage.removeItem(cid + sendid + "time");
       let newwritters = (localStorage.getItem(sendid + "allWritters")).replace("|" + cid, "");
       localStorage.setItem(sendid + "allWritters", newwritters);
-      location.reload()
+      location.reload();
     }
     // 비밀번호가 일치하지 않는 경우 alert를 띄운다.
     else if (cpw !== cid + target.id + "pw") { alert("비밀번호가 일치하지 않습니다.") }
@@ -173,7 +184,7 @@ for (let i = writtersarray.length - 1; i > 1; i--) {
     <p class="content" >${writtersarray[i]} </p>
     <p id="id">Reivew date</p>
     <p class="content" >${localStorage.getItem(writtersarray[i] + sendid + "time")}</p>
-    <button class="delete_to_modal" id="${sendid}" type="button">Delete</button>
+    <button class="delete_to_modal" id="${writtersarray[i]}" type="button">Delete</button>
     <div id ='modal_container'></div>
     <div id ='modal'></div>
     <div id ='modal_up'></div>`
@@ -186,12 +197,13 @@ for (let i = writtersarray.length - 1; i > 1; i--) {
 document.addEventListener('click', function (event) {
 
   if (event.target.classList.contains('delete_to_modal')) {
+    let targetid = event.target.id
 
     let temp_html =
       `<div id="modal_up">
           <input id="user_id" placeholder="user ID" autocomplete="off"></input>
           <input id="user_pw" placeholder="user PW" autocomplete="off"></input>
-          <button class="delete_in_modal" id="${movie.id}" type="button">Delete</button>
+          <button class="delete_in_modal" id="${targetid}" type="button">Delete</button>
       </div>`;
 
     document.getElementById('modal_container').insertAdjacentHTML('beforeend', temp_html);
@@ -200,28 +212,36 @@ document.addEventListener('click', function (event) {
   } else { return; } // <--- 이걸로 인해서 해결!
 
   // 'review' 삭제 기능입니다.
+
   const delete_in_modal = document.querySelector(".delete_in_modal");
 
-  delete_in_modal.addEventListener('click', function () {
+  delete_in_modal.addEventListener('click', function ({ target }) {
 
     let writtercomment = document.querySelector("#user_id").value
     let passwordcomment = document.querySelector("#user_pw").value
 
-    if (passwordcomment == localStorage.getItem(writtercomment + sendid + "pw")) {
+    if (passwordcomment == localStorage.getItem(target.id + sendid + "pw") && writtercomment == target.id) {
+      localStorage.removeItem(target.id + sendid + "pw");
+      localStorage.removeItem(target.id + sendid + "input");
+      localStorage.removeItem(target.id + sendid + "time");
 
-      localStorage.removeItem(writtercomment + sendid + "pw");
-      localStorage.removeItem(writtercomment + sendid + "input");
-      localStorage.removeItem(writtercomment + sendid + "time");
-
-      let newwritters = (localStorage.getItem(sendid + "allWritters")).replace("|" + writtercomment, "")
-      localStorage.setItem(sendid + "allWritters", newwritters)
+      let newwritters = (localStorage.getItem(sendid + "allWritters")).replace("|" + target.id, "");
+      localStorage.setItem(sendid + "allWritters", newwritters);
 
       alert("삭제 완료 되었습니다!")
       return location.reload() // <--- 이걸로 인해서 해결!
     }
-    else if (passwordcomment !== localStorage.getItem(writtercomment + sendid + "pw")) {
+    else if (writtercomment !== target.id && passwordcomment !== localStorage.getItem(target.id + sendid + "pw")) {
+      alert("해당 리뷰 작성자가 아닙니다.")
+      return
+    }
+    else if (writtercomment == target.id && passwordcomment !== localStorage.getItem(target.id + sendid + "pw")) {
       alert("비밀번호가 일치하지 않습니다.")
-      return // <--- 이걸로 인해서 해결!
+      return
+    }
+    else if (writtercomment !== target.id && passwordcomment == localStorage.getItem(target.id + sendid + "pw")) {
+      alert("ID가 일치하지 않습니다.")
+      return
     }
   });
 })
