@@ -23,11 +23,14 @@ const next = document.querySelector("#next");
 prev.addEventListener("click", prevfunc);
 next.addEventListener("click", nextfunc);
 
+document.addEventListener("DOMContentLoaded", pastereview);
+
 function prevfunc() {
   let ranknum = parseInt(localStorage.getItem("rankof" + sendid)) - 1
   if (ranknum > 0) {
     sendid = localStorage.getItem(ranknum)
     detailload()
+    pastereview()
   } else { alert("제일 처음 영화입니다.") }
 }
 function nextfunc() {
@@ -35,6 +38,7 @@ function nextfunc() {
   if (ranknum < 21) {
     sendid = localStorage.getItem(ranknum)
     detailload()
+    pastereview()
   } else { alert("제일 마지막 영화입니다.") }
 }
 
@@ -71,9 +75,9 @@ function detailload() {
             <input type="password" id="password" placeholder="password" autocomplete="off">
         </div>
         <div class="buttons">
-            <button class="save" type="button">Save</button>
-            <button class="edit" type=" button">Edit</button>
-            <button class="delete" type=" button">Delete</button>
+            <button class="save" id =${movie.id} type="button">Save</button>
+            <button class="edit"  id =${movie.id} type=" button">Edit</button>
+            <button class="delete"  id =${movie.id} type=" button">Delete</button>
         </div>`
       }
       // 개봉일 전이면 작동하는 else if문
@@ -89,9 +93,7 @@ function detailload() {
     }
     )
 }
-
-// 페이지를 열면 실행한다.
-detailload();
+detailload()
 
 // 홈 버튼을 누르면 index.html 로 이동한다.
 home.addEventListener("click", clickhome);
@@ -128,16 +130,18 @@ function clickDetails({ target }) {
     // INPUT를 입력하지 않았을 경우 alert를 띄운다.
     else if (!cinput) { alert("내용을 입력해주세요.") }
     // 같은 아이디가 있는 경우 중복 ID 생성을 방지한다.
-    else if (cpw == localStorage.getItem(cid + sendid + "pw", cpw)) { alert("중복 ID를 생성할 수 없습니다.") }
+    else if (cpw == localStorage.getItem(cid + target.id + "pw", cpw)) { alert("중복 ID를 생성할 수 없습니다.") }
     // 위의 경우가 모두 안닌 경우 ID 생성을 허가한다.
-    else if (!localStorage.getItem(cid + sendid + "pw", cpw)) {
+    else if (!localStorage.getItem(cid + target.id + "pw", cpw)) {
       today = new Date();
-      localStorage.setItem(cid + sendid + "pw", cpw);
-      localStorage.setItem(cid + sendid + "input", cinput);
-      localStorage.setItem(cid + sendid + "time", today.toString().slice(0, 24))
-      location.reload()
+      localStorage.setItem(cid + target.id + "pw", cpw);
+      localStorage.setItem(cid + target.id + "input", cinput);
+      localStorage.setItem(cid + target.id + "time", today.toString().slice(0, 24))
       // 작성자를 아까 만든 key에 save 할 때 마다 덧붙여 저장한다. 이 때 구분자는 "|" 로 준다. 
-      localStorage.setItem(sendid + "allWritters", localStorage.getItem(sendid + "allWritters") + "|" + cid);
+      localStorage.setItem(target.id + "allWritters", localStorage.getItem(target.id + "allWritters") + "|" + cid);
+      sendid = target.id
+      detailload()
+      pastereview()
     }
   }
 
@@ -145,38 +149,50 @@ function clickDetails({ target }) {
   // 비밀번호와 아이디 입력이 일치할 경우 작성시간과 댓글 내용을 업데이트 해 준다.
   else if (target.matches(".edit")) {
     today = new Date();
-    if (cpw == localStorage.getItem(cid + sendid + "pw")) {
-      localStorage.setItem(cid + sendid + "input", cinput)
-      localStorage.setItem(cid + sendid + "time", today.toString().slice(0, 24))
-      location.reload()
+    if (cpw == localStorage.getItem(cid + target.id + "pw")) {
+      console.log(target.id)
+      localStorage.setItem(cid + target.id + "input", cinput)
+      localStorage.setItem(cid + target.id + "time", today.toString().slice(0, 24))
+      sendid = target.id
+      detailload()
+      pastereview()
     }
     // 비밀번호가 일치하지 않는 경우 alert를 띄운다.
-    else if (cpw !== localStorage.getItem(cid + sendid + "pw")) {
+    else if (cpw !== localStorage.getItem(cid + target.id + "pw")) {
       alert("비밀번호가 일치하지 않습니다.")
+      console.log(target.id)
+      sendid = target.id
+      detailload()
+      pastereview()
     }
   }
   // delete 버튼을 누르면 실행됨
   // 비밀번호와 아이디 입력이 일치할 경우 데이터를 삭제한다.
   else if (target.matches(".delete")) {
-    if (cpw == localStorage.getItem(cid + sendid + "pw")) {
-      localStorage.removeItem(cid + sendid + "pw");
-      localStorage.removeItem(cid + sendid + "input");
-      localStorage.removeItem(cid + sendid + "time");
-      let newwritters = (localStorage.getItem(sendid + "allWritters")).replace("|" + cid, "");
-      localStorage.setItem(sendid + "allWritters", newwritters);
-      location.reload();
+    if (cpw == localStorage.getItem(cid + target.id + "pw")) {
+      localStorage.removeItem(cid + target.id + "pw");
+      localStorage.removeItem(cid + target.id + "input");
+      localStorage.removeItem(cid + target.id + "time");
+      let newwritters = (localStorage.getItem(target.id + "allWritters")).replace("|" + cid, "");
+      localStorage.setItem(target.id + "allWritters", newwritters);
+      sendid = target.id
+      detailload()
+      pastereview()
     }
     // 비밀번호가 일치하지 않는 경우 alert를 띄운다.
     else if (cpw !== cid + target.id + "pw") { alert("비밀번호가 일치하지 않습니다.") }
   }
 }
 
-// 아까 만든 작성자 이름을 모은 key의 value를 가져와서 split을 통해 배열로 만들어 준다.
-writtersarray = localStorage.getItem(sendid + 'allWritters').split("|")
-// 리뷰의 개수 만큼 리뷰를 붙여 준다. 
-for (let i = writtersarray.length - 1; i > 1; i--) {
-  let p =
-    `<p id="top">Review</p>
+function pastereview() {
+  // 아까 만든 작성자 이름을 모은 key의 value를 가져와서 split을 통해 배열로 만들어 준다.
+  if (!localStorage.getItem(sendid + 'allWritters')) { localStorage.setItem(sendid + 'allWritters', "|") }
+  writtersarray = localStorage.getItem(sendid + 'allWritters').split("|")
+  // 리뷰의 개수 만큼 리뷰를 붙여 준다. 
+  comment.innerHTML = ""
+  for (let i = writtersarray.length - 1; i > 1; i--) {
+    let p =
+      `<p id="top">Review</p>
     <p class="content">
       ${localStorage.getItem(writtersarray[i] + sendid + "input")}
     </p>
@@ -188,11 +204,13 @@ for (let i = writtersarray.length - 1; i > 1; i--) {
     <div id ='modal_container'></div>
     <div id ='modal'></div>
     <div id ='modal_up'></div>`
-  let divBox = document.createElement('div')
-  divBox.className = 'divBoxClass'
-  divBox.innerHTML = p
-  comment.appendChild(divBox)
+    let divBox = document.createElement('div')
+    divBox.className = 'divBoxClass'
+    divBox.innerHTML = p
+    comment.appendChild(divBox)
+  }
 }
+
 // 'modal' 기능을 구현한 함수입니다.
 document.addEventListener('click', function (event) {
 
@@ -229,7 +247,7 @@ document.addEventListener('click', function (event) {
       localStorage.setItem(sendid + "allWritters", newwritters);
 
       alert("삭제 완료 되었습니다!")
-      return location.reload() // <--- 이걸로 인해서 해결!
+      return detailload(), pastereview() // <--- 이걸로 인해서 해결!
     }
     else if (writtercomment !== target.id && passwordcomment !== localStorage.getItem(target.id + sendid + "pw")) {
       alert("해당 리뷰 작성자가 아닙니다.")

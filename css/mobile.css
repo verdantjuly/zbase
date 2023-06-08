@@ -180,7 +180,8 @@
     border: solid 2px black;
 }
 
-.lovebtn {
+.lovebtn,
+.lovebtn2 {
     width: 30px;
     height: 30px;
     border: none;
@@ -189,7 +190,8 @@
     background-color: white;
 }
 
-.lovebtn:hover {
+.lovebtn:hover,
+.lovebtn2:hover {
     width: 30px;
     height: 30px;
     border: none;

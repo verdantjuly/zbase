@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", load);
 home.addEventListener("click", load);
 searchbtn.addEventListener("click", searchfunc);
 allchart.addEventListener("click", load);
-mychart.addEventListener("click", loved);
+mychart.addEventListener("click", openloved);
 mobilebtn.addEventListener("click", mobileSwitch);
 desktopbtn.addEventListener("click", desktopSwitch);
 
@@ -128,6 +128,11 @@ export function clickAllChart({ target }) {
         localStorage.setItem(target.id, Number(localStorage.getItem(target.id)) + 1)
         load()
     }
+    // lovebtn2를 버튼을 누르면 detail.html으로 이동한다. 
+    else if (target.matches(".lovebtn2")) {
+        localStorage.setItem(target.id, Number(localStorage.getItem(target.id)) + 1)
+        searchfunc()
+    }
     // details 버튼을 누르면 detail.html으로 이동한다. 
     else if (target.matches(".details")) {
         localStorage.setItem("movieid", `${target.id}`);
@@ -136,7 +141,7 @@ export function clickAllChart({ target }) {
 }
 
 // loved 차트를 출력하는 함수이다.
-function loved() {
+function openloved() {
     document.getElementById("cards").innerHTML = ""
     // 1. love 2. title의 알파벳 순서로 정렬한다. 
     movies.sort(function (prev, next) {
