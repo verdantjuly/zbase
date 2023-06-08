@@ -1,5 +1,5 @@
 // 주요 정보
-const sendid = localStorage.getItem("movieid")
+let sendid = localStorage.getItem("movieid")
 const apikey = '9119f549275a23ec65b54dfd6152a086'
 
 // 전역 변수 초기화
@@ -16,6 +16,24 @@ const overview = document.querySelector("#overview");
 const review = document.querySelector("#review");
 const comment = document.querySelector("#comment");
 const home = document.querySelector("#home");
+
+// prev, next 버튼 실행 방법
+const prev = document.querySelector("#prev");
+const next = document.querySelector("#next");
+prev.addEventListener("click", prevfunc);
+next.addEventListener("click", nextfunc);
+
+function prevfunc() {
+  let ranknum = parseInt(localStorage.getItem("rankof" + sendid)) - 1
+  sendid = localStorage.getItem(ranknum)
+  detailload()
+}
+function nextfunc() {
+  let ranknum = parseInt(localStorage.getItem("rankof" + sendid)) + 1
+  sendid = localStorage.getItem(ranknum)
+  detailload()
+}
+
 
 // 메인페이지를 실행하면 작동하는 함수 detailload
 function detailload() {
@@ -38,7 +56,7 @@ function detailload() {
       if (today >= releasedate) {
         title.innerHTML = `${movie.title}`
         overview.innerHTML =
-        `<h1 class="alltitle">${movie.title}</h1>
+          `<h1 class="alltitle">${movie.title}</h1>
         <p class="alltime">${(localStorage.getItem(movie.id))} people loved this movie</p>  
         <p class="rate" id="rate">★ ${movie.vote_average}</p> 
         <p class="overviewtitle">Overview</p>${movie.overview}`
@@ -154,10 +172,64 @@ for (let i = writtersarray.length - 1; i > 1; i--) {
     <p id="id">ID</p>
     <p class="content" >${writtersarray[i]} </p>
     <p id="id">Reivew date</p>
-    <p class="content" >${localStorage.getItem(writtersarray[i] + sendid + "time")}</p>`
+    <p class="content" >${localStorage.getItem(writtersarray[i] + sendid + "time")}</p>
+    <button class="delete_to_modal" id="${sendid}" type="button">Delete</button>
+    <div id ='modal_container'></div>
+    <div id ='modal'></div>
+    <div id ='modal_up'></div>`
   let divBox = document.createElement('div')
   divBox.className = 'divBoxClass'
   divBox.innerHTML = p
   comment.appendChild(divBox)
 }
-// test
+// 'modal' 기능을 구현한 함수입니다.
+document.addEventListener('click', function (event) {
+
+  if (event.target.classList.contains('delete_to_modal')) {
+
+    let temp_html =
+      `<div id="modal_up">
+          <input id="user_id" placeholder="user ID" autocomplete="off"></input>
+          <input id="user_pw" placeholder="user PW" autocomplete="off"></input>
+          <button class="delete_in_modal" id="${movie.id}" type="button">Delete</button>
+      </div>`;
+
+    document.getElementById('modal_container').insertAdjacentHTML('beforeend', temp_html);
+    document.getElementById('modal').classList.add('active');
+    document.getElementById('modal_up').classList.add('active');
+  } else { return; } // <--- 이걸로 인해서 해결!
+
+  // 'review' 삭제 기능입니다.
+  const delete_in_modal = document.querySelector(".delete_in_modal");
+
+  delete_in_modal.addEventListener('click', function () {
+
+    let writtercomment = document.querySelector("#user_id").value
+    let passwordcomment = document.querySelector("#user_pw").value
+
+    if (passwordcomment == localStorage.getItem(writtercomment + sendid + "pw")) {
+
+      localStorage.removeItem(writtercomment + sendid + "pw");
+      localStorage.removeItem(writtercomment + sendid + "input");
+      localStorage.removeItem(writtercomment + sendid + "time");
+
+      let newwritters = (localStorage.getItem(sendid + "allWritters")).replace("|" + writtercomment, "")
+      localStorage.setItem(sendid + "allWritters", newwritters)
+
+      alert("삭제 완료 되었습니다!")
+      return location.reload() // <--- 이걸로 인해서 해결!
+    }
+    else if (passwordcomment !== localStorage.getItem(writtercomment + sendid + "pw")) {
+      alert("비밀번호가 일치하지 않습니다.")
+      return // <--- 이걸로 인해서 해결!
+    }
+  });
+})
+
+// 'modal' 창을 닫히게 하는 함수입니다.
+document.addEventListener('click', function (event) {
+  if (event.target.id === 'modal') {
+    document.getElementById('modal').classList.remove('active');
+    document.getElementById('modal_up').classList.remove('active');
+  }
+});

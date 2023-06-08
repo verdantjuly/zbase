@@ -29,16 +29,27 @@ export function searchfunc() {
             let uppertitle = movie.title.toUpperCase()
             if (uppertitle.includes(upperSearch)) {
                 return (
-                    `<div class= "card">      
-                        <div class="cardbody" id="${movie.id}">
-                            <img class="allimg" id="${movie.id}"  src="https://image.tmdb.org/t/p/w500${movie.poster_path}"></img>
-                            <h4 class="alltitle" id="${movie.id}">${movie.title}</h4> 
-                            <p class="alltime" id="${movie.id}">${((localStorage.getItem(movie.id)).length) - 1} people loved this movie</p>   
-                        </div>
-                        <div class = "buttons">
-                            <button class="details" id="${movie.id} type="button">Details</button>
-                        </div>
-                    </div>`)
+                    `<div class="card">      
+                            <div class="cardbody" id="${movie.id}">
+                                <div class="opacbox" style="position: absolute; z-index: 2;">
+                                    <p class="alltitle" id="${movie.id}">${movie.title}</p>
+                                    <p class="allvote" id="${movie.id}">평점 : ★ ${movie.vote_average}</p>
+                                    <p class="allpopularity" id="${movie.id}">인기도 : ${movie.popularity}</p>
+                                    <p class="allrelease_date" id="${movie.id}">개봉일 : ${movie.release_date}</p>
+                                </div>
+                            <div class="imgbox">
+                                <span class="allrank" id="${movie.id}">${movies.indexOf(movie) + 1}</span>
+                                <img class="allimg" id="${movie.id}" src="https://image.tmdb.org/t/p/w500${movie.poster_path}"></img>
+                            </div>
+                            <div class="rankvote">
+                            </div>
+                                <p class="alltime" id="${movie.id}">${localStorage.getItem(movie.id)} people loved this movie</p>   
+                            </div>
+                            <div class="buttons">
+                                <button class="lovebtn" id="${movie.id}" type="button">♥︎</button>
+                                <button class="details" id="${movie.id}">Details</button>
+                            </div>
+                        </div>`)
             }
             cards.addEventListener("click", clickAllChart)
         }).join("")
