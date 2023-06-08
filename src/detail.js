@@ -247,7 +247,7 @@ document.addEventListener('click', function (event) {
       localStorage.setItem(sendid + "allWritters", newwritters);
 
       alert("삭제 완료 되었습니다!")
-      return location.reload() // <--- 이걸로 인해서 해결!
+      return detailload(), pastereview() // <--- 이걸로 인해서 해결!
     }
     else if (writtercomment !== target.id && passwordcomment !== localStorage.getItem(target.id + sendid + "pw")) {
       alert("해당 리뷰 작성자가 아닙니다.")
