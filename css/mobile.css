@@ -1,53 +1,105 @@
 .cardbody {
-    padding: 0px 18px 0px 18px;
+    width: 250px;
+    height: 450px;
+    margin: 0px 25px 0px 25px;
 }
 
 .alltitle {
-    font-size: 40px;
-
+    font-size: 20px;
+    color: #fff;
+    margin: 15px 15px 15px 15px;
 }
 
-
-
 .allvote {
+    color: #fff;
+    font-size: 15px;
+    margin: 0px 15px 0px 15px;
+}
 
-    font-size: 30px;
+.allpopularity {
+    color: #fff;
+    font-size: 15px;
+    margin: 0px 15px 0px 15px;
+}
 
+.allrelease_date {
+    color: #fff;
+    font-size: 15px;
+    margin: 0px 15px 0px 15px;
+}
+
+.allrank {
+    height: 100px;
+    font-size: 100px;
+    color: #090909;
+    font-style: italic;
+    position: absolute;
+    margin-left: 20px;
+    font-size: 50px;
+    color: #fff;
+    text-shadow: 2px 2px 2px gray;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr 1fr 1fr 1fr));
+    gap: 2rem;
+    padding: 1rem;
+    place-items: center
 }
 
 .card {
-
-    width: 500px;
-    margin: 30px 8px 200px 8px;
-
+    width: 250px;
+    margin: 10px 10px 50px 10px;
+    transition: all 0.35s ease-in-out;
 }
 
-
-.cards {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
+.card:hover {
+    transform: scale(1.05);
 }
 
-.allimage {
+.opacbox {
+    /* border-radius: 10%; */
+    position: absolute;
+    width: 250px;
+    height: 375px;
     border-radius: 10%;
+    background-color: firebrick;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    /* 불투명도 설정 */
+}
+
+.card:hover .opacbox {
+    opacity: 1;
+    /* 불투명도 설정 */
+}
+
+.allimg {
+    border-radius: 10%;
+    width: 250px;
+}
+
+
+.overview {
+    width: 250px;
+    text-overflow: ellipsis;
+    padding: 20px;
+    color: #fff;
 }
 
 .header {
-    font-size: 30px;
+    padding-left: 50px;
     font-style: italic;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
 }
 
 #search {
     font-size: 15px;
-    margin: 15px 0px 30px 40px;
+    margin: 15px 0px 0px 40px;
     padding: 10px 10px 10px 10px;
     width: 250px;
 
@@ -60,8 +112,6 @@
     font-size: 15px;
     color: white;
     background-color: black;
-
-
 }
 
 #searchbtn:hover {
@@ -72,115 +122,97 @@
     border: solid 3px gray;
 }
 
-
-.allrank {
-    font-size: 80px;
-    font-weight: 900;
-    font-style: italic;
-}
-
-
 #allchart,
 #mychart {
-    margin: 0px 2px 0px 2px;
-    width: 250px;
-    height: 70px;
-    font-size: 40px;
+    margin: 15px 2px 0px 2px;
+    width: 130px;
+    height: 40px;
+    font-size: 20px;
     font-style: italic;
     color: white;
     background-color: black;
     border: 4px solid black;
-
-
+    border-radius: 10%;
 }
-
 
 #allchart:focus,
 #mychart:focus,
 #allchart:hover,
 #mychart:hover {
-    margin: 0px 2px 0px 2px;
-    width: 250px;
-    height: 70px;
-    font-size: 40px;
+    margin: 15px 2px 0px 2px;
+    width: 130px;
+    height: 40px;
+    font-size: 20px;
     font-style: italic;
     color: black;
     background-color: white;
     border: 4px solid black;
-
+    border-radius: 10%;
 }
 
 #mobilebtn {
-    font-size: 40px;
-    margin-top: 30px;
-    width: 250px;
-    height: 70px;
+    margin-top: 20px;
+    width: 80px;
+    height: 30px;
     border: none;
 }
 
 #desktopbtn {
-    font-size: 40px;
-    width: 250px;
-    height: 70px;
+    margin-top: 20px;
+    width: 80px;
+    height: 30px;
     border: none;
 }
 
 #mobilebtn:hover,
 #mobilebtn:focus {
-    font-size: 40px;
-    width: 250px;
-    height: 70px;
-    border: solid 4px black;
+    margin-top: 20px;
+    width: 80px;
+    height: 30px;
+    border: solid 2px black;
 }
-
 
 #desktopbtn:hover,
 #desktopbtn:focus {
-    font-size: 40px;
-    width: 250px;
-    height: 70px;
-    border: solid 4px black;
+    margin-top: 20px;
+    width: 80px;
+    height: 30px;
+    border: solid 2px black;
 }
 
 .lovebtn {
-
-    width: 100px;
-    height: 100px;
+    width: 30px;
+    height: 30px;
     border: none;
-    font-size: 80px;
+    font-size: 30px;
     color: rgb(115, 0, 23);
     background-color: white;
-
-
 }
 
 .lovebtn:hover {
-
-    width: 100px;
-    height: 100px;
+    width: 30px;
+    height: 30px;
     border: none;
-    font-size: 80px;
+    font-size: 30px;
     color: red;
     background-color: white;
-
-
 }
 
 .alltime {
     font-style: italic;
     font-weight: 900;
-    font-size: 40px;
-
 }
 
-.allvote {
-    font-weight: 900;
+.buttons {
+    height: 30px;
+    margin-left: 20px;
 }
+
 
 .details {
-    width: 150px;
-    height: 50px;
-    font-size: 30px;
+    width: 70px;
+    height: 30px;
+    font-size: 15px;
     font-style: italic;
     color: white;
     background-color: black;
@@ -189,9 +221,9 @@
 }
 
 .details:hover {
-    width: 150px;
-    height: 50px;
-    font-size: 30px;
+    width: 70px;
+    height: 30px;
+    font-size: 15px;
     font-style: italic;
     color: black;
     background-color: white;
