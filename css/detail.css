@@ -102,7 +102,6 @@
     border-radius: 30px;
 }
 
-
 #container {
     display: flex;
     flex-direction: row;
@@ -125,8 +124,6 @@
     width: 400px;
     font-size: 20px;
     margin: 0px 20px 20px 20px;
-
-
 }
 
 #reviewbox {
@@ -136,7 +133,6 @@
     padding: 30px 30px 30px 30px;
     display: flex;
     flex-direction: column;
-
 }
 
 .overviewtitle {
@@ -237,19 +233,10 @@
     font-size: 15px;
     font-weight: 600;
     color: white;
-
     background-color: black;
     border-color: transparent;
     border-radius: 15px;
-
     width: 70px;
-
-    /* display: flex;
-    justify-content: center;
-    align-items: center;
-
-    margin-top: auto;
-    margin-bottom: 10px; */
 }
 
 .delete_to_modal:hover {
@@ -258,20 +245,16 @@
     border-color: black;
 }
 
-/* modal */
 #modal {
     display: none;
 }
 
-/* 'modal' 외부의 영역입니다. */
 #modal.active {
     display: block;
     position: fixed;
     top: 0;
     left: 0;
-    /* 100%로 변경했습니다. */
     width: 100%;
-    /* 100%로 변경했습니다. */
     height: 100%;
     background-color: #000000;
     opacity: 0.8;
@@ -282,28 +265,21 @@
     display: none;
 }
 
-/* 'modal' 창입니다. */
 #modal_up.active {
     color: black;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     word-wrap: break-word;
     position: fixed;
-
     padding: 20px;
-
     width: 200px;
     height: 140px;
-
     z-index: 2;
-
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
     background-color: white;
     border-radius: 20px;
 }
@@ -312,12 +288,9 @@
 #user_pw {
     border-color: rgba(216, 216, 216, 0.4);
     border-radius: 5px;
-
     outline-color: rgba(216, 216, 216, 0.8);
-
     width: 200px;
     height: 30px;
-
     margin-bottom: 5px;
     margin-top: 5px;
 }
@@ -326,19 +299,14 @@
     font-size: 15px;
     font-weight: 600;
     color: white;
-
     background-color: black;
     border-color: transparent;
     border-radius: 15px;
-
     width: 70px;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     margin-top: auto;
-    /* 세로 중앙 정렬 */
     margin-bottom: 10px;
 }
 
@@ -347,5 +315,3 @@
     color: black;
     border-color: black;
 }
-
-/* modal - end */
