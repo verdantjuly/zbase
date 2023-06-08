@@ -1,3 +1,5 @@
+import { detaildesktopSwitch, detailmobileSwitch } from "./detailswitch.js";
+
 // 주요 정보
 let sendid = localStorage.getItem("movieid")
 const apikey = '9119f549275a23ec65b54dfd6152a086'
@@ -16,12 +18,18 @@ const overview = document.querySelector("#overview");
 const review = document.querySelector("#review");
 const comment = document.querySelector("#comment");
 const home = document.querySelector("#home");
+const detailmobilebtn = document.getElementById("detailmobilebtn");
+const detaildesktopbtn = document.getElementById("detaildesktopbtn");
 
 // prev, next 버튼 실행 방법
 const prev = document.querySelector("#prev");
 const next = document.querySelector("#next");
 prev.addEventListener("click", prevfunc);
 next.addEventListener("click", nextfunc);
+
+// mobile desktop btn
+detailmobilebtn.addEventListener("click", detailmobileSwitch);
+detaildesktopbtn.addEventListener("click", detaildesktopSwitch);
 
 document.addEventListener("DOMContentLoaded", pastereview);
 
