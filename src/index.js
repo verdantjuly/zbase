@@ -128,6 +128,11 @@ export function clickAllChart({ target }) {
         localStorage.setItem(target.id, Number(localStorage.getItem(target.id)) + 1)
         load()
     }
+    // lovebtn2를 버튼을 누르면 detail.html으로 이동한다. 
+    else if (target.matches(".lovebtn2")) {
+        localStorage.setItem(target.id, Number(localStorage.getItem(target.id)) + 1)
+        searchfunc()
+    }
     // details 버튼을 누르면 detail.html으로 이동한다. 
     else if (target.matches(".details")) {
         localStorage.setItem("movieid", `${target.id}`);
